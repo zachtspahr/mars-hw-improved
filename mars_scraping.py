@@ -21,25 +21,32 @@ def index():
     executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
     browser = Browser('chrome', **executable_path, headless=False)
 
+    try:
+        url = 'https://mars.nasa.gov/news/'
+        browser.visit(url)
 
-    url = 'https://mars.nasa.gov/news/'
-    browser.visit(url)
+        html = browser.html
+        soup = BeautifulSoup(html, "html.parser")
 
-    html = browser.html
-    soup = BeautifulSoup(html, "html.parser")
-
-    results = soup.find_all('body')
-    for result in results:
+        results = soup.find_all('body')
+        for result in results:
     # scrape the article header 
-        try:
+            news_title = result.find('div', class_='content_title').text
+            news_p = result.find('div', class_='article_teaser_body').text
+    except: 
+        url = 'https://mars.nasa.gov/news/'
+        browser.visit(url)
+        time.sleep(2)
 
+        html = browser.html
+        soup = BeautifulSoup(html, "html.parser")
+
+        results = soup.find_all('body')
+        for result in results:
+    # scrape the article header 
             news_title = result.find('div', class_='content_title').text
             news_p = result.find('div', class_='article_teaser_body').text
-        except: 
-            browser.visit(url)
-            time.sleep(2)
-            news_title = result.find('div', class_='content_title').text
-            news_p = result.find('div', class_='article_teaser_body').text
+    
 
 
 
