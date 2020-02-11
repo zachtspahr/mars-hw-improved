@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Web Scraping!</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container text-center">
+    <h1 class="jumbotron">Welcome to My Mars Scraping App!</h1>
+    <div>
+
+   <div class="container text-center">
+  <h1 >Latest Mars Story: {{ mars_database.news_title}}</h1>
+  <div>
+    <h4 >Latest Mars Headline: {{ mars_database.news_paragraph }}</h4>
+  </div>
+    
+  <div class="container">
+
+      <!-- Row 1 -->
+
+       <!-- Row 1 -->
+    
+  
+      <div class="row">
+          <div class="col-md-12 text-left">
+            <h3>Latest Mars Weather</h3>
+    
+            <h7> {{ mars_database.weather_tweet }}. </h7>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h7>         </h7>
+            </div>
+            <div class="col-md-6">
+                <h4>   Mars Facts!      </h4>
+            </div>
+    
+        
+          </div>
+    
+      
+      
+      <div class="row">
+        <div class="col-md-6">
+      <a class="dropdown-item" href="https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"> The Featured Image on Mars Nasa Page</a>
+      <img src= {{ mars_database.featured_image_url }} width="600" height="550" alt="MARS Image">
+        </div>
+        <div class="col-md-1">
+        
+          </div>
+          <p>  </p>
+
+          <div class="col-md-5">
+
+         <a> {{ mars_database.mars_facts | safe}} </a>
+
+
+        </div>
+
+        
+            </div>
+
+      
+
+        
+    </div>
+    <div class="row">
+    <div class="col-md-5">
+    <a class="dropdown-item"> {{ mars_database.hemispheres.title[0]}} </a>
+      <img src= {{ mars_database.hemispheres.img_url[0] }} width="400" height="350" alt="MARS Image">
+      </div>
+        <div class="col-md-1">
+                
+        </div>
+       
+        
+      <div class="col-md-5">
+        <a class="dropdown-item"> {{ mars_database.hemispheres.title[1]}} </a>
+          <img src= {{ mars_database.hemispheres.img_url[1] }} width="400" height="350" alt="MARS Image">
+      </div>
+    </div>
+    <div class="col-md-1">
+            
+    </div>
+        
+        
+      </div>
+
+      <div class="row">
+          <div class="col-md-5">
+          <a class="dropdown-item"> {{ mars_database.hemispheres.title[2]}} </a>
+            <img src= {{ mars_database.hemispheres.img_url[2] }} width="400" height="350" alt="MARS Image">
+            </div>
+              <div class="col-md-1">
+                      
+              </div>
+             
+              
+            <div class="col-md-5">
+              <a class="dropdown-item"> {{ mars_database.hemispheres.title[3]}} </a>
+                <img src= {{ mars_database.hemispheres.img_url[3] }} width="400" height="350" alt="MARS Image">
+            </div>
+          </div>
+          <div class="col-md-1">
+                  
+          </div>
+              
+              
+            </div>
+      <div class="row">
+      <div class="col-md-12">
+         <h3>Would you like to scrape again?</h3>
+          
+         <a class="dropdown-item" href="http://127.0.0.1:5000/scrape"> Click Here!</a>
+                </div>
+              </div>
+      <div class="col-md-12">
+     <a>   This page was scraped on {{ mars_database.time_scraped}}. </a>
+                   
+    
+    </div>
+    </div>
+                
+      </div>
+        
+
+        
+
+    
+      
+      </div>
+    
+  
+ 
+
+
+</body>
+
+</html>
