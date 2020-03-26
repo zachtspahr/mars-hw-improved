@@ -13,8 +13,9 @@ import os
 is_heroku = False
 if 'IS_HEROKU' in os.environ:
     is_heroku = True
+
 if is_heroku == False:
-    print ("Heroku not working")
+    from config import username, mot_de_passe
 else:
    
     username = os.environ.get('username')
@@ -42,7 +43,7 @@ class JSONEncoder(json.JSONEncoder):
 
 @zek_app.route("/")
 def index():
-    return "Hello World!"
+    return render_template('index.html')
 
 @zek_app.route("/senate_api")
 def api_senate_endpoint():
