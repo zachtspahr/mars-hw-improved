@@ -7,6 +7,7 @@ from bson import ObjectId
 from flask import Flask
 from flask_pymongo import pymongo
 import os 
+from os import environ
 #from "/Users/zspahr/Desktop/Bootcamp/config.py" import mongo
 
 # Heroku check
