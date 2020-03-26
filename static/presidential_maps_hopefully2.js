@@ -60,7 +60,7 @@ if (category == 2000) {
 
 
 
-var query_url = "http://127.0.0.1:5000/senate_api"
+var query_url = "https://zach-spahr-politics.herokuapp.com/senate_api"
 
   d3.json(query_url, function(data) {
       senate_data = data

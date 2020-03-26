@@ -1,4 +1,4 @@
-var query_url = "http://127.0.0.1:5000/house_api"
+var query_url = "https://zach-spahr-politics.herokuapp.com/house_api"
 
 var api_key = "pk.eyJ1IjoiZGFydGFuaW9uIiwiYSI6ImNqbThjbHFqczNrcjkzcG10cHpoaWF4aWUifQ.GwBz1hO0sY2QE8bXq9pSRg";
 
