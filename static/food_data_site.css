@@ -1,0 +1,329 @@
+/* FORMATTING BODY AND HEADER TAGS */
+body {
+  background: whitesmoke;
+}
+
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+
+.leaflet-popup-content {
+  text-align: center;
+}
+
+
+/* CSS from the Leaflet-Choropleth documentation */
+.legend {
+  padding: 6px 8px;
+  font: 12px Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #555;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.legend ul {
+  padding: 0;
+  margin: 0;
+  clear: both;
+  list-style-type: none;
+}
+
+
+
+.legend li {
+  display: inline-block;
+  width: 30px;
+  height: 22px;
+}
+
+
+.legend .min {
+  float: left;
+  padding-bottom: 5px;
+}
+
+
+
+.legend .max {
+  float: right;
+}
+
+
+
+h1 {
+  text-align: center;
+}
+
+
+h1 {
+  font-size: 68px;
+  font-family: "Arial";
+  font-weight: bold;
+}
+
+
+
+h2 {
+  font-size: 25px;
+  font-family: "Arial";
+  font-weight: normal;
+  color: whitesmoke;
+  text-align: center;
+}
+
+
+
+h3 {
+  font-size: 30px;
+}
+
+p {
+  font-size: 15px;
+}
+
+
+
+
+/*FORMATTING THE NAVIGATION BAR*/
+.navbar {
+  padding: 0.1px;
+  font-family: sans-serif;
+  font-size: 0.9em;
+  background: white;
+  border-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+
+
+/*FORMATTING NAVBAR LI's INLINE BLOCK ELEMENTS (GITHUB ICON)*/
+.navbar li {
+  display: inline-block;
+  padding: 0px;
+  margin-right: 50px;
+  margin-left: 1180px;
+  cursor: pointer;
+  background:lightgrey;
+  border-radius: 2px;
+  margin-top: 12px;
+}
+
+
+
+/*DELETING DEFAULT LINK STYLES*/
+.navbar li a {
+  color: #000;
+  text-decoration: none;
+}
+
+
+
+/*FORMATTING THE HEADER*/
+.header {
+  background-repeat: no-repeat;
+  overflow:hidden;
+  height: 370px;
+  padding: 55px;
+  margin: 0;
+  background: #cdcdcd;
+  width: 100%;
+  background-image:
+  linear-gradient(to bottom, rgba(8, 8, 8, 0.5), rgba(8, 8, 8, 0.5)),
+  url('https://bartaco.com/media/Bartaco_819-1400x500.jpg');
+}
+
+
+
+/*FORMATTING THE PRINT BUTTON BACKGROUND*/
+.align {
+  background: white;
+  text-align: left;
+  font: outline;
+}
+
+
+/*CENTERING H1 TAG INSIDE THE HEADER, GIVING SOME PADDING, ETC.*/
+.header h1 {
+  padding: 40px;
+  margin: 0;
+  color: whitesmoke;
+  text-align: center;
+}
+
+
+/*CENTERING H2 TAG INSIDE THE HEADER, GIVING SOME PADDING, ETC.*/
+.header2 h2 {
+  padding: 40px;
+  margin: 0;
+  color: whitesmoke;
+  text-align: center;
+  margin-bottom: 10px;
+  padding-bottom: 40px;
+}
+
+
+
+/* GIVING THE .POST ELEMENT MARGIN ON 2 SIDES (I NEED TO REVISE THIS ONE)*/
+.post {
+  margin-top: 50px;
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+
+
+
+/*FORMATTING SECTION HEADING (NAVIGATE)*/
+.section-heading {
+font-size: 40px;
+margin-top: 0;
+font-weight: bold;
+margin-bottom: 15px;
+}
+
+
+
+/*FORMATTING THE HEADING (ICONS)*/
+.service-heading {
+  margin: 15px 0;
+  text-transform: none;
+  color: whitesmoke;
+}
+
+/*FORMATTING THE TEXT (NAVIGATE)*/
+.text {
+  color: whitesmoke;
+}
+
+
+
+/*FORMATTING SUB-HEADING (NAVIGATE)*/
+.section-subheading {
+  font-size: 22px;
+  margin-top: 0;
+  font-style: italic;
+  font-family: 'Roboto Mono';
+  font-weight: normal;
+  margin-bottom: 30px;
+  }
+
+
+/*FORMATTING THE FOOTER*/
+.footer 
+{
+  background-color: gray;
+  color: whitesmoke;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  max-width: 100%;
+}
+
+
+
+
+/*FORMATTING THE ID'S*/
+  #things {
+    background-color: rgb(188, 127, 245);
+    padding-top: 60px;
+    padding-bottom: 60px;
+    color: whitesmoke
+}
+
+
+
+#usa-icon-header {
+  font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+
+#graph-icon-header {
+  font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+
+#machine-learning-header {
+  font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+
+/*ADDING VIDEO TO THE BACKGROUNG*/
+.background-wrap {
+  position: fixed;
+  z-index: -1000;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+
+#video-bg-elem {
+  position: absolute;
+  top: 60;
+  left: 0;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+
+/*FORMATTING THE HEATMAP*/
+#map {
+  height: 100%; 
+  outline: none;
+  text-align:center; 
+  width: 90%; 
+  margin-left:65px; 
+  margin-right:140px;
+  border:8px solid rgb(129, 129, 170);
+}
+
+#bar {
+  position: relative;
+  width: 90%; 
+  height: 100%; 
+  margin-left:65px; 
+  margin-right:140px;  
+  font-size: 11px;
+  background-color: cornflowerblue;
+
+}
+
+
+#scatter {
+  position: relative;
+  width: 70%; 
+  height: 80%; 
+  margin-left:210px; 
+  margin-right:140px;   
+  font-size: 11px;
+  background-color: cornflowerblue;
+
+}
+
+#scatter2 {
+  position: relative;
+  width: 70%; 
+  height: 100%; 
+  margin-left:210px; 
+  margin-right:140px;   
+  font-size: 11px;
+  background-color: cornflowerblue;
+
+}

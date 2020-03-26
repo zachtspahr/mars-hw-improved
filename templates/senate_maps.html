@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>2018 Senate Map</title>
+
+    <!-- Leaflet JS & CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+
+    <!-- d3 JS -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <!-- Marker Cluster JS & CSS -->
+    <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style14.css')}}">
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="header1 fadeInDown animated">Zach's Politics Data Site</h1>
+    <h2 class="header2 fadeInDown animated"> Providing Data Sets and Analysis of 2020 Election Races</h2>
+  </header>
+    
+  <br>
+  <br>
+
+  <main>
+
+    <section class="posts">
+
+      <article class="post">
+
+        <div id="map1"></div>
+        <center>  
+          <b>
+            <h4 style="font-size:33px; color: rgba(29, 0, 29, 0.692); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+              Select Election Results</h4>
+          </b>
+        </center>
+        
+
+        <br>
+
+        <center> 
+          <h4 style="font-size:19px; color: rgba(29, 0, 29, 0.692); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+            Elections</h4>
+          </center>
+
+        <style> 
+        .select {
+            font-size: 30px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            vertical-align: baseline;
+            align-items: center;
+            align-self: center;
+            text-align: center;
+            width: 800px ;
+          }
+        
+        </style>
+        <center>   
+        <select class= "select" id="categories">
+        <option> Select Category</option>
+        <option value="2000"> 2000 Presidential</option>
+        <option value="2004"> 2004 Presidential</option>
+        <option value="2008"> 2008 Presidential</option>
+        <option value="2012"> 2012 Presidential</option>
+        <option value="2016"> 2016 Presidential</option>
+    
+        </select>
+      </center>
+
+        <br>
+        <br>
+
+    </article></section>
+
+    <br>
+    <br>
+
+  </main>
+  <!-- The div where we will inject our map -->
+ <div id="map" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: relative;"> 
+   MAP<div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(-204.317px, 81.9961px, 0px);">
+    <div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer " style="z-index: 1; opacity: 1;">
+  <div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 17; transform: translate3d(-2400px, -900px, 0px) scale(2);"></div>
+  <div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 18; transform: translate3d(-800px, -250px, 0px) scale(1);">
+       
+
+  <!-- API key -->
+  <!-- <script src="{{ url_for('static', filename='config.js') }}"></script> -->
+  <script src="{{ url_for('static', filename='presidential_maps_hopeful.js') }}"></script>
+  
+  <!-- Our JS -->
+  
+</body>
+</html>

@@ -49,11 +49,11 @@ def scrape_everything():
     mars_weather_url = "https://twitter.com/marswxreport?lang=en"
     browser.visit(mars_weather_url)
     time.sleep(3)
-    html_3 = browser.html
-    soup = BeautifulSoup(html_3, "html.parser")
-    results_3 = soup.find_all('body')
-    results2 = soup.body.findAll(text=re.compile('InSight sol'), limit=1)
-    weather_tweet = results2[0].replace("\n"," ")
+    #html_3 = browser.html
+    #soup = BeautifulSoup(html_3, "html.parser")
+    #results_3 = soup.find_all('body')
+    #results2 = soup.body.findAll(text=re.compile('InSight sol'), limit=1)
+    #weather_tweet = results2[0]
   
     facts_url = "https://space-facts.com/mars/"
     browser.visit(facts_url)
@@ -99,7 +99,6 @@ def scrape_everything():
         "news_paragraph": news_p,
         "featured_image_url": actual_url,
         "hemispheres": hemisphere,
-        "weather_tweet": weather_tweet,
         "mars_facts": html_1,
         "time_scraped": time_now
     }

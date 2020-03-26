@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>2000's Presidential Election Results Map</title>
+
+    <!-- Leaflet JS & CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+
+    <!-- d3 JS -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <!-- Marker Cluster JS & CSS -->
+    <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style20.css')}}">
+</head>
+<style>
+
+body {background-color: #4e5d6c;};
+
+</style>
+<body >
+
+<div class ="wrapper"> 
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand glyphicon glyphicon-home" href="#">Home/About</a>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <a href="#"><span class="glyphicon glyphicon-map-marker"></span> Presidential Election History</a>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <a href="#"><span class="glyphicon glyphicon-map-marker"></span>Who are my senators?</a>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <a href="#"><span class="glyphicon glyphicon-stats"></span>Congressional Districts Data</a>
+          </ul>
+        </div>   
+    <br>
+    
+  <header class="header">
+    <h1 class="header1 fadeInDown animated" style="color: rgba(7, 17, 12, 0.692); text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Zach's Politics Data Site</h1>
+    <h2 class="header2 fadeInDown animated" style="color: rgba(17, 6, 27, 0.692);text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" > Providing Data Sets and Analysis of 2020 Election Races</h2>
+  </header>
+
+</div>   
+
+<div>
+    <h4 style="color: rgb(90, 19, 19);text-align: center;"> The map below features stadwide results from each state from the last four elections. This data is fed from a mongodb atlas database
+        and sent up through an endpoint using flask. </h4>
+</div>
+
+  <main>
+
+    <section class="posts">
+
+      <article class="post">
+
+        <div id="map1"></div>
+        <center>  
+          <b>
+            <h4 style="font-size:33px; color: rgba(29, 0, 29, 0.692); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+              US Presidential Election Results</h4>
+          </b>
+        </center>
+        
+
+        <br>
+
+        <center> 
+          <h4 style="font-size:25px; color: rgba(29, 0, 29, 0.692); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+            Elections</h4>
+          </center>
+
+        <style> 
+        .select {
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            vertical-align: baseline;
+            align-items: center;
+            align-self: center;
+            text-align: center;
+            width: 600px ;
+          }
+        
+        </style>
+        <center>   
+        <select class= "select" id="categories">
+        <option> Select Category</option>
+        <option value="2000"> 2000 Presidential</option>
+        <option value="2004"> 2004 Presidential</option>
+        <option value="2008"> 2008 Presidential</option>
+        <option value="2012"> 2012 Presidential</option>
+        <option value="2016"> 2016 Presidential</option>
+    
+        </select>
+      </center>
+
+        <br>
+        <br>
+
+    </article></section>
+
+    <br>
+    <br>
+
+  </main>
+  <!-- The div where we will inject our map -->
+ <div id="map" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: relative;"> 
+   MAP<div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(-204.317px, 81.9961px, 0px);">
+    <div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer " style="z-index: 1; opacity: 1;">
+  <div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 17; transform: translate3d(-2400px, -900px, 0px) scale(2);"></div>
+  <div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 18; transform: translate3d(-800px, -250px, 0px) scale(1);">
+       
+
+  <!-- API key -->
+  <!-- <script src="{{ url_for('static', filename='config.js') }}"></script> -->
+  <script src="{{ url_for('static', filename='presidential_maps_hopefully2.js') }}"></script>
+  
+  <!-- Our JS -->
+  
+</body>
+</html>
