@@ -1,1 +1,1 @@
-web: gunicorn my_mongo_api:zek_app
+web: gunicorn my_mongo_api:zek_app --log-file - --log-level debug
