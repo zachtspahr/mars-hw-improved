@@ -6,10 +6,18 @@ import json
 from bson import ObjectId
 from flask import Flask
 from flask_pymongo import pymongo
+import os 
 
-app = Flask(__name__)
 
-CONNECTION_STRING = "mongodb+srv://zachtspahr:capsfan15@cluster0-zgmov.mongodb.net/test?retryWrites=true&w=majority"
+username = os.environ.get('username')
+mot_de_passe = os.environ.get('mot_de_passe')
+
+#username = " "
+#mot_de_passe =" "
+
+zek_app = Flask(__name__)
+
+CONNECTION_STRING = f'mongodb+srv://{username}:{mot_de_passe}@cluster0-zgmov.mongodb.net/test?retryWrites=true&w=majority'
 client = pymongo.MongoClient(CONNECTION_STRING)
 db = client.get_database('geojsons')
 user_collection = pymongo.collection.Collection(db, 'test_collection')
@@ -22,35 +30,34 @@ class JSONEncoder(json.JSONEncoder):
 
 
 
-#app.config["MONGO_URI"] = "mongodb+srv://zachtspahr:capsfan15@cluster0-zgmov.mongodb.net/test?retryWrites=true&w=majority"
-#mongo = PyMongo(app)
 
-@app.route("/")
+
+@zek_app.route("/")
 def index():
     return "Hello World!"
 
-@app.route("/senate_api")
+@zek_app.route("/senate_api")
 def api_senate_endpoint():
     senate_map = db.senate_map.find_one()
     return (JSONEncoder().encode(senate_map))
-@app.route("/house_api")
+@zek_app.route("/house_api")
 def api_house_endpoint():
     house_map = db.house_maps.find_one()
     return (JSONEncoder().encode(house_map))
 
-@app.route("/president_map")
+@zek_app.route("/president_map")
 def api_senate_map():
     return render_template('president_maps.html')
 
-@app.route("/house_map")
+@zek_app.route("/house_map")
 def api_house_map():
     return render_template('house_maps.html')
 
-@app.route("/test")
+@zek_app.route("/test")
 def insert():
     db.db.collection.insert_one({"name": "John"})
     return "Connected to the data base!"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    zek_app.run(debug=True)
 

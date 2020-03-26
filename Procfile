@@ -1,0 +1,1 @@
+web: gunicorn my_mongo_api:zek_app
