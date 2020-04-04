@@ -1,5 +1,3 @@
-var query_url = "https://zach-spahr-politics.herokuapp.com/house_maps_api"
-
 var api_key = "pk.eyJ1IjoiZGFydGFuaW9uIiwiYSI6ImNqbThjbHFqczNrcjkzcG10cHpoaWF4aWUifQ.GwBz1hO0sY2QE8bXq9pSRg";
 
 var mapboxAccessToken = api_key;
@@ -21,26 +19,53 @@ var category = selectedCategory.property("value");
 console.log(category);
 
 
-if (category == 2018) {
-    winner = "midterm_dem_vote";
-    president = "Democratic Party"
-    loser = "midterm_gop_vote";
-    runner_up = "Republican Party"
-    year = "midterm_margin";
-    new_category = 2018
+if (category == 2000) {
+    winner = "Bush_Pct_00";
+    president = "Bush"
+    loser = "Gore_Pct_00";
+    runner_up = "Gore"
+    year = "Dem_Margin_00";
+    new_category = 2000
+  } else if (category == 2004) {
+    winner = "Bush_Pct_04";
+    president = "Bush"
+    loser = "Kerry_Pct_04";
+    runner_up = "Kerry"
+    year = "Dem_Margin_04";
+    new_category = 2004
+  } else if (category == 2008) {
+    winner = "Obama_Pct_08";
+    president = "Obama"
+    loser = "McCain_Pct_08";
+    runner_up ="McCain"
+    year = "Dem_Margin_08";
+    new_category = 2008
+  
+  }else if (category == 2012) {
+    winner = "Obama_Pct_12";
+    president = "Obama"
+    loser = "Romney_Pct_12";
+    runner_up = "Romney"
+    year = "Dem_Margin_12";
+    new_category = 2012
+  
   } else {
-    winner = "trump_vote";
+    winner = "Trump_Pct_16";
     president = "Trump"
-    loser = "clinton_vote";
+    loser = "Clinton_Pct_16";
     runner_up = "Clinton"
-    year = "presidential_margin";
+    year = "Dem_Margin_16";
     new_category = 2016
   }
 
- d3.json(query_url, function(data) {
-      house_data = data
-      console.log(house_data);
-      L.geoJson(house_data).addTo(map);
+
+
+var query_url = "https://zach-spahr-politics.herokuapp.com/state_maps_api"
+
+  d3.json(query_url, function(data) {
+      senate_data = data
+      console.log(senate_data);
+      L.geoJson(senate_data).addTo(map);
      
       
       //if (legend instanceof L.Control) { map.removeControl(legend); }
@@ -58,8 +83,8 @@ if (category == 2018) {
         };
 
     info.update = function (props) {
-    this._div.innerHTML = '<h4> Election Results by House District</h4>' +  (props ?
-        '<b>' + props.district + "<br>" + `</b> ${category} ${president} Vote Share:<br />` + parseFloat(props[`${winner}`]).toFixed(2) + '%</b> <br />' + `</b> ${category} ${runner_up}  Vote Share:<br />` + parseFloat(props[`${loser}`]).toFixed(2) + '%</b> <br />'
+    this._div.innerHTML = '<h4>State Election Results</h4>' +  (props ?
+        '<b>' + props.name + "<br>" + `</b> ${category} ${president} Vote Share:<br />` + parseFloat(props["Past_Election_Results"][`${winner}`]).toFixed(2) + '%</b> <br />' + `</b> ${category} ${runner_up}  Vote Share:<br />` + parseFloat(props["Past_Election_Results"][`${loser}`]).toFixed(2) + '%</b> <br />'
         : 'Hover over a state');
         };
         
@@ -81,7 +106,7 @@ if (category == 2018) {
         color: 'white',
         dashArray: '3',
         fillOpacity: 0.7,
-        fillColor: getColor(feature.properties[`${year}`])
+        fillColor: getColor(feature.properties.Past_Election_Results[`${year}`])
             };
         }
         function highlightFeature(e) {
@@ -120,7 +145,7 @@ if (category == 2018) {
             });
         }
         
-        geojson = L.geoJson(house_data, {
+        geojson = L.geoJson(senate_data, {
             style: style,
             onEachFeature: onEachFeature
         }).addTo(map);

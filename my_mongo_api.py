@@ -46,14 +46,24 @@ class JSONEncoder(json.JSONEncoder):
 def index():
     return render_template('index.html')
 
-@zek_app.route("/senate_api")
-def api_senate_endpoint():
+@zek_app.route("/state_maps_api")
+def api_senate_maps_endpoint():
     senate_map = db.senate_map.find_one()
     return (JSONEncoder().encode(senate_map))
-@zek_app.route("/house_api")
-def api_house_endpoint():
+@zek_app.route("/house_maps_api")
+def api_house_maps_endpoint():
     house_map = db.house_maps.find_one()
     return (JSONEncoder().encode(house_map))
+
+@zek_app.route("/states_api")
+def api_senate_endpoint():
+    states_data = db.states_data.find_one()
+    return (JSONEncoder().encode(states_data))
+
+@zek_app.route("/house_api")
+def api_house_endpoint():
+    house_data = db.house_districts.find_one()
+    return (JSONEncoder().encode(house_data))
 
 @zek_app.route("/president_map")
 def api_senate_map():
