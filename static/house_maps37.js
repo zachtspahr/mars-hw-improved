@@ -1,46 +1,75 @@
-var query_url = "http://127.0.0.1:5000/house_api"
+var query_url = "https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/2020_congressional_data.json"
 
 var api_key = "pk.eyJ1IjoiZGFydGFuaW9uIiwiYSI6ImNqbThjbHFqczNrcjkzcG10cHpoaWF4aWUifQ.GwBz1hO0sY2QE8bXq9pSRg";
 
 var mapboxAccessToken = api_key;
+//var map = L.map('map').setView([37.8, -96], 4);
+
+
 var map = L.map('map').setView([37.8, -96], 4);
+
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxAccessToken, {
     id: 'mapbox/light-v9',
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
 }).addTo(map);
-
+//https://api.mapbox.com/styles/v1/mapbox/outdoors-v11.html?title=true&access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA#2/20/0
 var info; 
 var legend;
+var geojson;
+var geojsonLayer;
+document.getElementById('categories').addEventListener('click', function (event) {
+    var element = event.currentTarget;
+    element.clicks = (element.clicks || 0) + 1;
+    var clicks=element.clicks
+    console.log(clicks);
+});
 
-
-
+// This attempt is normal d3 select, going to try both for loops and layers. Guessing will need for loop, which
+// will be complicated af. 
 d3.selectAll("#categories").on("change", menu);
 function menu() { var selectedCategory = d3.select("#categories option:checked");
 var category = selectedCategory.property("value");
+console.log(geojson);
 console.log(category);
+
+
 
 
 if (category == 2018) {
     winner = "midterm_dem_vote";
-    president = "Democratic Party"
+    president = "Democratic Party";
     loser = "midterm_gop_vote";
-    runner_up = "Republican Party"
+    runner_up = "Republican Party";
     year = "midterm_margin";
-    new_category = 2018
+    new_category = 2018;
+    query_url = "https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/2018_districts_data.json"
+} else if (category == 2020) {
+    winner = "2020_dem_pct";
+    president = "Democratic Party"
+    loser = "2020_gop_pct";
+    runner_up = "Republican Party"
+    year = "2020_dem_margin";
+    new_category = 2020;
+    query_url="https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/2020_congressional_data.json"
   } else {
-    winner = "trump_vote";
-    president = "Trump"
-    loser = "clinton_vote";
-    runner_up = "Clinton"
-    year = "presidential_margin";
+    winner = "2016_gop_house_pct";
+    president = "Republican Party"
+    loser = "2016_dem_house_pct";
+    runner_up = "Democratic Party"
+    year = "2016_dem_house_margin"
     new_category = 2016
+    query_url= "https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/2016_districts_data.json";
+    //removeFeature(L.geoJson(),id);
+    //map.clearLayers();
   }
 
+
+
  d3.json(query_url, function(data) {
-      house_data = data
-      console.log(house_data);
-      L.geoJson(house_data).addTo(map);
+    house_data = data
+    console.log(house_data);
+    //L.geoJson(house_data).addTo(map);
      
       
       //if (legend instanceof L.Control) { map.removeControl(legend); }
@@ -58,8 +87,8 @@ if (category == 2018) {
         };
 
     info.update = function (props) {
-    this._div.innerHTML = '<h4>House Election Results</h4>' +  (props ?
-        '<b>' + props.district + "<br>" + `</b> ${category} ${president} Vote Share:<br />` + parseFloat(props["Past_Election_Results"][`${winner}`]).toFixed(2) + '%</b> <br />' + `</b> ${category} ${runner_up}  Vote Share:<br />` + parseFloat(props["Past_Election_Results"][`${loser}`]).toFixed(2) + '%</b> <br />'
+    this._div.innerHTML = '<h4> Election Results by House District</h4>' +  (props ?
+        '<b>' + props.district + "<br>" + `</b> ${category} ${president} Vote Share:<br />` + parseFloat(props[`${winner}`]).toFixed(2) + '%</b> <br />' + `</b> ${category} ${runner_up}  Vote Share:<br />` + parseFloat(props[`${loser}`]).toFixed(2) + '%</b> <br />'
         : 'Hover over a state');
         };
         
@@ -81,7 +110,7 @@ if (category == 2018) {
         color: 'white',
         dashArray: '3',
         fillOpacity: 0.7,
-        fillColor: getColor(feature.properties.Past_Election_Results[`${year}`])
+        fillColor: getColor(feature.properties[`${year}`])
             };
         }
         function highlightFeature(e) {
@@ -123,7 +152,9 @@ if (category == 2018) {
         geojson = L.geoJson(house_data, {
             style: style,
             onEachFeature: onEachFeature
-        }).addTo(map);
+        })
+        geojson.addTo(map);
+        console.log(geojson);
         
         map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
         
@@ -158,8 +189,10 @@ if (category == 2018) {
         //if (info instanceof L.Control) { map.removeControl(info); }
         legend.addTo(map);
         info.addTo(map);
+        
         //if (legend instanceof L.Control) { map.removeControl(legend); }
         //if (info instanceof L.Control) { map.removeControl(info); }
+        //if (geojson instanceof L.Control) { map.removeControl(info); }
         
         
     

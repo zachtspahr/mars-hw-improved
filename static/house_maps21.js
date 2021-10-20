@@ -1,34 +1,85 @@
+var query_url = "https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/2020_congressional_data.json"
+
 var api_key = "pk.eyJ1IjoiZGFydGFuaW9uIiwiYSI6ImNqbThjbHFqczNrcjkzcG10cHpoaWF4aWUifQ.GwBz1hO0sY2QE8bXq9pSRg";
 
 var mapboxAccessToken = api_key;
 var map = L.map('map').setView([37.8, -96], 4);
 
+
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxAccessToken, {
     id: 'mapbox/light-v9',
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
 }).addTo(map);
+//https://api.mapbox.com/styles/v1/mapbox/outdoors-v11.html?title=true&access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA#2/20/0
+var info; 
+var legend;
 
-var query_url = "http://127.0.0.1:5000/senate_api"
 
-  d3.json(query_url, function(data) {
-      senate_data = data
-      console.log(senate_data);
-      L.geoJson(senate_data).addTo(map);
+
+d3.selectAll("#categories").on("change", menu);
+function menu() { var selectedCategory = d3.select("#categories option:checked");
+var category = selectedCategory.property("value");
+console.log(info);
+console.log(category);
+d3.select(".leaflet-interactive").remove()
+
+
+if (category == 2018) {
+    winner = "midterm_dem_vote";
+    president = "Democratic Party";
+    loser = "midterm_gop_vote";
+    runner_up = "Republican Party";
+    year = "midterm_margin";
+    new_category = 2018;
+    query_url = "https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/2018_districts_data.json"
+} else if (category == 2020) {
+    winner = "2020_dem_pct";
+    president = "Democratic Party"
+    loser = "2020_gop_pct";
+    runner_up = "Republican Party"
+    year = "2020_dem_margin";
+    new_category = 2020;
+    query_url="https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/2020_congressional_data.json"
+  } else {
+    winner = "2016_gop_house_pct";
+    president = "Republican Party"
+    loser = "2016_dem_house_pct";
+    runner_up = "Democratic Party"
+    year = "2016_dem_house_margin"
+    new_category = 2016
+    query_url= "https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/2016_districts_data.json";
+    //removeFeature(L.geoJson(),id);
+    //map.clearLayers();
+  }
+
+
+
+ d3.json(query_url, function(data) {
+    house_data = data
+    console.log(house_data);
+    L.geoJson(house_data).addTo(map);
+     
+      
+      //if (legend instanceof L.Control) { map.removeControl(legend); }
+      //if (info instanceof L.Control) { map.removeControl(info); }
+      d3.select(".info").remove()
 
     var info = L.control()
 
+
     info.onAdd = function (map) {
+        
         this._div = L.DomUtil.create('div', 'info');
         this.update();
         return this._div;
         };
 
     info.update = function (props) {
-    this._div.innerHTML = '<h4>State Election Results</h4>' +  (props ?
-        '<b>' + props.name + '</b>  2000 Bush Vote Share:<br />' + parseFloat(props.Past_Election_Results.Bush_Votes_00) + '%</b> <br />' + '</b> 2000 Gore Vote Share:<br />' + parseFloat(props.Past_Election_Results.Gore_Votes_00) + '%</b> <br />'
+    this._div.innerHTML = '<h4> Election Results by House District</h4>' +  (props ?
+        '<b>' + props.district + "<br>" + `</b> ${category} ${president} Vote Share:<br />` + parseFloat(props[`${winner}`]).toFixed(2) + '%</b> <br />' + `</b> ${category} ${runner_up}  Vote Share:<br />` + parseFloat(props[`${loser}`]).toFixed(2) + '%</b> <br />'
         : 'Hover over a state');
         };
-        info.addTo(map);
+        
     function getColor(d) {
         return d > 30 ? '#0000ff' :
                 d > 20  ? '#3233c4' :
@@ -47,7 +98,7 @@ var query_url = "http://127.0.0.1:5000/senate_api"
         color: 'white',
         dashArray: '3',
         fillOpacity: 0.7,
-        fillColor: getColor(feature.properties.Past_Election_Results.Dem_Margin_00)
+        fillColor: getColor(feature.properties[`${year}`])
             };
         }
         function highlightFeature(e) {
@@ -86,20 +137,24 @@ var query_url = "http://127.0.0.1:5000/senate_api"
             });
         }
         
-        geojson = L.geoJson(senate_data, {
+        geojson = L.geoJson(house_data, {
             style: style,
             onEachFeature: onEachFeature
         }).addTo(map);
         
         map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
         
+        //if (legend != undefined) {
+        //map.removeLayer(legend)};
+        d3.select(".legend").remove()
         
         var legend = L.control({position: 'bottomright'});
         
         legend.onAdd = function (map) {
+           
         
             var div = L.DomUtil.create('div', 'info legend'),
-                grades = [-100, -20, -10, .001, 10, 20, 30],
+                grades = [-100, -20, -10, .001.toFixed(0), 10, 20, 30],
                 labels = [],
                 from, to;
         
@@ -112,11 +167,19 @@ var query_url = "http://127.0.0.1:5000/senate_api"
                     from + (to ? ' &ndash; ' + to : ' + '));
             }
         
-            div.innerHTML = '<h4>Dem Margin</h4>' + labels.join('<br>');
+            div.innerHTML = `<h4> ${new_category} Dem Margin</h4>` + labels.join('<br>');
             return div;
-        };
         
+        }
+        //if (legend instanceof L.Control) { map.removeControl(legend); }
+        //if (info instanceof L.Control) { map.removeControl(info); }
         legend.addTo(map);
+        info.addTo(map);
+        //if (legend instanceof L.Control) { map.removeControl(legend); }
+        //if (info instanceof L.Control) { map.removeControl(info); }
+        //if (geojson instanceof L.Control) { map.removeControl(info); }
+        
+        
     
     
     
@@ -125,5 +188,4 @@ var query_url = "http://127.0.0.1:5000/senate_api"
 
     
     
-    
-    
+}

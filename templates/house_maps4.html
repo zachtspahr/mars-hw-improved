@@ -72,7 +72,7 @@ body {background-color: #737685;};
 </div>   
 
 <div>
-    <h4 style="color: rgb(90, 19, 19);text-align: center;"> The map below features statewide results from each state from the last five US presidential elections. This data is fed from a mongodb atlas database
+    <h4 style="color: rgb(90, 19, 19);text-align: center;"> The map below features district-wide results from each state from the 2018 midterms and 2016 presidential election. This data is fed from a mongodb atlas database
         and sent up through an endpoint using flask. </h4>
 </div>
 
@@ -86,7 +86,7 @@ body {background-color: #737685;};
         <center>  
           <b>
             <h4 style="font-size:33px; color: rgba(29, 0, 29, 0.692); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-              US Presidential Election Results</h4>
+              House District</h4>
           </b>
         </center>
         
@@ -95,7 +95,7 @@ body {background-color: #737685;};
 
         <center> 
           <h4 style="font-size:25px; color: rgba(29, 0, 29, 0.692); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-            Elections</h4>
+            Select Year / Demographic info</h4>
           </center>
 
         <style> 
@@ -114,12 +114,10 @@ body {background-color: #737685;};
         <center>   
         <select class= "select" id="categories">
         <option> Select Category</option>
-        <option value="2000"> 2000 Presidential</option>
-        <option value="2004"> 2004 Presidential</option>
-        <option value="2008"> 2008 Presidential</option>
-        <option value="2012"> 2012 Presidential</option>
-        <option value="2016"> 2016 Presidential</option>
-        <option value="2020"> 2020 Presidential</option>
+        <option value="2016"> 2016 US House Election Results</option>
+        <option value="2018"> 2018 US House Election Results</option>
+        <option value="2020"> 2020 US House Election Results</option>
+        
     
         </select>
       </center>
@@ -143,9 +141,12 @@ body {background-color: #737685;};
 
   <!-- API key -->
   <!-- <script src="{{ url_for('static', filename='config.js') }}"></script> -->
-  <!--script src="{{ url_for('static', filename='presidential_maps_hopefully7.js') }}"></script-->
+  <script src="{{ url_for('static', filename='house_maps22.js') }}"></script>
+  <!--script type="text/javascript" src="house_maps19.js"></script-->
+   <!-- New Line Tested to get this this thing going -->
   
   <!-- Our JS -->
-  <script src="static/presidential_maps_hopefully7.js"></script> >
+  
+  
 </body>
 </html>

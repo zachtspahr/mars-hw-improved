@@ -49,18 +49,26 @@ if (category == 2000) {
     year = "Dem_Margin_12";
     new_category = 2012
   
-  } else {
+  } else if (category == 2016){
     winner = "Trump_Pct_16";
     president = "Trump"
     loser = "Clinton_Pct_16";
     runner_up = "Clinton"
     year = "Dem_Margin_16";
     new_category = 2016
+
+}else  {
+    winner = "Biden_Pct_20";
+    president = "Biden"
+    loser = "Trump_Pct_20";
+    runner_up = "Trump"
+    year = "Dem_Margin_20";
+    new_category = 2020
   }
 
 
 
-var query_url = "https://zach-spahr-politics.herokuapp.com/state_maps_api"
+var query_url = "http://127.0.0.1:5000/state_maps_api"
 
   d3.json(query_url, function(data) {
       senate_data = data

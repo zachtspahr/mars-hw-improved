@@ -7,6 +7,7 @@ from bson import ObjectId
 from flask import Flask
 from flask_pymongo import pymongo
 import os 
+import requests
 from os import environ
 #from "/Users/zspahr/Desktop/Bootcamp/config.py" import mongo
 
@@ -48,8 +49,12 @@ def index():
 
 @zek_app.route("/state_maps_api")
 def api_senate_maps_endpoint():
-    senate_map = db.senate_map.find_one()
+    senate_map = db.senate_maps.find_one()
     return (JSONEncoder().encode(senate_map))
+@zek_app.route("/president_dc_api")
+def dc_senate_maps_endpoint():
+    dc_map = db.president_dc_maps.find_one()
+    return (JSONEncoder().encode(dc_map))
 @zek_app.route("/house_maps_api")
 def api_house_maps_endpoint():
     house_map = db.house_maps.find_one()
@@ -68,14 +73,27 @@ def api_house_endpoint():
 @zek_app.route("/president_map")
 def api_senate_map():
     return render_template('president_maps.html')
+@zek_app.route("/president_map_2")
+def api_senate_map2():
+    return render_template('president_maps2.html')
 
 @zek_app.route("/house_map")
 def api_house_map():
     return render_template('house_maps.html')
+@zek_app.route("/house_map2")
+def api_house_map2():
+    return render_template('house_maps2.html')
+@zek_app.route("/house_map_new")
+def api_house_map_new():
+    return render_template('house_maps_no_dropdown.html')
+
+@zek_app.route("/president_cd_maps")
+def api_president_cd_map():
+    return render_template('president_cd_maps.html')
 
 @zek_app.route("/test")
 def insert():
-    db.db.collection.insert_one({"name": "John"})
+    #db.db.collection.insert_one({"name": "John"})
     return "Connected to the data base!"
 
 if __name__ == "__main__":
