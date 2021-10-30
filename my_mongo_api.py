@@ -9,6 +9,10 @@ from flask_pymongo import pymongo
 import os 
 import requests
 from os import environ
+import pandas as pd
+from bs4 import BeautifulSoup
+import urllib.request
+
 #from "/Users/zspahr/Desktop/Bootcamp/config.py" import mongo
 
 # Heroku check
@@ -51,6 +55,69 @@ def index():
 def api_senate_maps_endpoint():
     senate_map = db.senate_maps.find_one()
     return (JSONEncoder().encode(senate_map))
+
+
+@zek_app.route("/senate_info_api")
+def api_senate_info_endpoint():
+
+    #This requests scores from 538
+    response =requests.get("https://projects.fivethirtyeight.com/biden-congress-votes/")
+    soup = BeautifulSoup(response.text, "html.parser")
+    last_name = []
+    results = soup.find_all("div",class_="last")
+    for i in range(len(results)):
+        last_name.append(results[i].text)
+    margin = []
+    results2 = soup.find_all("td",class_="margin")
+    for i in range(len(results2)):
+        margin.append(float(results2[i].text))
+    state = []
+    results3 = soup.find_all("td",class_="state")
+    for i in range(len(results3)):
+        state.append(results3[i].text)
+    biden_score = []
+    results4 = soup.find_all("td",class_="score")
+    for i in range(len(results4)):
+        biden_score.append(float(results4[i].text.split("%")[0]))
+    biden_plus_minus = []
+    results5 = soup.find_all("text",class_="bg")
+    for i in range(len(results5)):
+        biden_plus_minus.append(float(results5[i].text))
+    #creates df for biden scores
+    biden_score_dict = {
+        "last_name": last_name,
+        "state": state,
+        "Biden_margin"  : margin,
+        "Biden_score"  : biden_score,
+        "Biden_plus_minus": biden_plus_minus}
+    biden_score_df = pd.DataFrame(biden_score_dict)
+    biden_score_df= biden_score_df.sort_values(by=['state',"last_name"])
+    biden_score_df=biden_score_df.reset_index()
+    biden_score_df.loc[63,"last_name"]="Lujan"
+    biden_score_df["merge_id"]= biden_score_df["last_name"]+"-"+ biden_score_df["state"]
+    biden_score_df= biden_score_df.drop(columns=['index',"last_name","state"])
+    #merges this df with previous senate data
+    new_senate_df= pd.read_csv("https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/senate_old_info.csv")
+    new_senate_df= new_senate_df.drop(columns=["Unnamed: 0"])
+    new_senate_df = new_senate_df.merge(biden_score_df)
+    junior_sen = new_senate_df[new_senate_df['Ranking']=='junior']
+    junior_sen=junior_sen.fillna(0)
+    senior_sen = new_senate_df[new_senate_df['Ranking']=='senior']
+    senior_sen=senior_sen.fillna(0)
+    new_states_data = db.senate_2021_data.find_one()
+    for i in range(len(new_states_data["features"])):
+        new_states_data["features"][i]["properties"]["Junior_Senator"].update({"Biden_Score" : junior_sen["Biden_score"].values.tolist()[i],
+                                                                            "Biden_plus_minus":junior_sen["Biden_plus_minus"].values.tolist()[i]
+                                                                           })
+        new_states_data["features"][i]["properties"]["Senior_Senator"].update({"Biden_Score" : senior_sen["Biden_score"].values.tolist()[i],
+                                                                           "Biden_plus_minus":senior_sen["Biden_plus_minus"].values.tolist()[i]})
+
+    return (JSONEncoder().encode(new_states_data))
+
+
+
+
+
 @zek_app.route("/president_dc_api")
 def dc_senate_maps_endpoint():
     dc_map = db.president_dc_maps.find_one()
@@ -72,7 +139,7 @@ def api_house_endpoint():
 
 @zek_app.route("/president_map")
 def api_senate_map():
-    return render_template('president_maps.html')
+    return render_template('president_maps2.html')
 @zek_app.route("/president_map_2")
 def api_senate_map2():
     return render_template('president_maps2.html')
