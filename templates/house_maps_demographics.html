@@ -73,8 +73,10 @@ body {background-color: #737685;};
 </div>   
 
 <div>
-    <h4 style="color: rgb(90, 19, 19);text-align: center;"> The map below features district-wide results from each state from the 2018 midterms and 2016 presidential election. This data is fed from a mongodb atlas database
-        and sent up through an endpoint using flask. </h4>
+    <h4 style="color: rgb(90, 19, 19);text-align: center;"> The map below features the demographic information (from census bureau) for each congressional district. 
+      This data is fed from a mongodb atlas database and sent up through an endpoint using flask. The purpose of this to show the different demographic info that
+      makes each congressional district unique in its own way. I have highlighted racial and education data because these two demographic traits have become increasingly
+      correlated with voter preferences.    </h4>
 </div>
 
   <main>
@@ -96,7 +98,7 @@ body {background-color: #737685;};
 
         <center> 
           <h4 style="font-size:25px; color: rgba(29, 0, 29, 0.692); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-            Select Year / Demographic info</h4>
+            Select Demographic info</h4>
           </center>
 
         <style> 
@@ -115,9 +117,17 @@ body {background-color: #737685;};
         <center>   
         <select class= "select" id="categories">
         <option> Select Category</option>
-        <option value="2016"> 2016 US House Election Results</option>
-        <option value="2018"> 2018 US House Election Results</option>
-        <option value="2020"> 2020 US House Election Results</option>
+        <option value="white_pct"> Pct of district that is White</option>
+        <option value="black_pct"> Pct of district that is Black</option>
+        <option value="asian_pct"> Pct of district that is Asian</option>
+        <option value="hispanic_pct"> Pct of district that is Hispanic</option>
+        <option value="native_american_pct"> Pct of district that is native american</option>
+        <option value="other_race_pct"> Pct of district that is another race</option>
+        <option value="ba_pct"> Pct of district with a college degree</option>
+        <option value="white_college_pct"> Pct of district that is white with a college degree</option>
+        <option value="white_non_college_pct"> Pct of district that is white with no college degree</option>
+        <!-- option value="median_income"> Median Income of District</option-->
+        <!-- option value="cook_pvi"> 2018 Cook Partisan Lean</option-->
         
     
         </select>
@@ -142,7 +152,7 @@ body {background-color: #737685;};
 
   <!-- API key -->
   <!-- <script src="{{ url_for('static', filename='config.js') }}"></script> -->
-  <script src="{{ url_for('static', filename='house_maps31.js') }}"></script>
+  <script src="{{ url_for('static', filename='house_demo8.js') }}"></script>
   <!--script type="text/javascript" src="house_maps19.js"></script-->
    <!-- New Line Tested to get this this thing going -->
   

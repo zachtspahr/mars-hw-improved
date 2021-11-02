@@ -150,9 +150,9 @@ def api_house_map():
 @zek_app.route("/house_map2")
 def api_house_map2():
     return render_template('house_maps2.html')
-@zek_app.route("/house_map_new")
+@zek_app.route("/house_districts_demographics")
 def api_house_map_new():
-    return render_template('house_maps_no_dropdown.html')
+    return render_template('house_maps_demographics.html')
 
 @zek_app.route("/president_cd_maps")
 def api_president_cd_map():
