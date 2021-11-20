@@ -47,9 +47,21 @@ body {background-color: #737685;};
           <div class="navbar-header">
               <a class="navbar-brand glyphicon glyphicon-home" href="https://zach-spahr-politics.herokuapp.com/">Home/About</a>
           </div>
-          <ul class="nav navbar-nav navbar-right">
-            <a href="https://zach-spahr-politics.herokuapp.com/president_map"><span class="glyphicon glyphicon-map-marker"></span> Presidential Election History</a>
-          </ul>
+          <!-- API key -->
+          <!-- API key -->
+          <!--ul class="nav navbar-nav navbar-right"-->
+            <!--a href="https://zach-spahr-politics.herokuapp.com/president_map"><span class="glyphicon glyphicon-map-marker"></span> Presidential Election History</a-->
+          <!--/ul-->
+          <div class="dropdown" id ="hello3">
+            <button id ="hello4" class="btn btn-primary dropdown-toggle" style="color: #337ab7; text-align: center; background-color:transparent; border-color: transparent;" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-map-marker"></span> Statewide Election Results</button>
+            
+            <ul class="dropdown-menu">
+              <li><a href="https://zach-spahr-politics.herokuapp.com/president_map">Presidential Results from 2000 to 2020 </a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com/senate_maps">Senate Results 2008-2020</a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com//house_pop_maps">House Popular Vote by State 2008-2020 </a></li>
+            </ul>
+            
+          </div>
           <div class="dropdown" id ="hello">
             <button id ="hello2" class="btn btn-primary dropdown-toggle" style="color: #337ab7; text-align: center; background-color:transparent; border-color: transparent;" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-stats"></span> Results by House District</button>
             

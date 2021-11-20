@@ -17,65 +17,85 @@ d3.selectAll("#categories").on("change", menu);
 function menu() { var selectedCategory = d3.select("#categories option:checked");
 var category = selectedCategory.property("value");
 console.log(category);
+$(".leaflet-interactive").remove();
 
 
-if (category == 2000) {
-    winner = "Bush_Pct_00";
-    president = "Bush"
-    loser = "Gore_Pct_00";
-    runner_up = "Gore"
-    year = "Dem_Margin_00";
-    new_category = 2000
-  } else if (category == 2004) {
-    winner = "Bush_Pct_04";
-    president = "Bush"
-    loser = "Kerry_Pct_04";
-    runner_up = "Kerry"
-    year = "Dem_Margin_04";
-    new_category = 2004
-  } else if (category == 2008) {
-    winner = "Obama_Pct_08";
-    president = "Obama"
-    loser = "McCain_Pct_08";
-    runner_up ="McCain"
-    year = "Dem_Margin_08";
+if (category == 2008) {
+    election = "2008_Senate_Election"
+    winner = "winning_pct";
+    //president = "Democratic Party"
+    loser = "losing_pct";
+    //runner_up = "Republican Party"
+    //year = "Dem_Margin_00";
     new_category = 2008
-  
-  }else if (category == 2012) {
-    winner = "Obama_Pct_12";
-    president = "Obama"
-    loser = "Romney_Pct_12";
-    runner_up = "Romney"
-    year = "Dem_Margin_12";
+  } else if (category == 2010) {
+    election = "2010_Senate_Election"
+    winner = "winning_pct";
+    //president = "Democratic Party"
+    loser = "losing_pct";
+    //runner_up = "Republican Party"
+    //year = "Dem_Margin_04";
+    new_category = 2010
+  } else if (category == 2012) {
+    election = "2012_Senate_Election"
+    winner = "winning_pct";
+    //president = "Democratic Party"
+    loser = "losing_pct";
+    //runner_up = "Republican Party"
+    //year = "Dem_Margin_08";
     new_category = 2012
   
+  }else if (category == 2014) {
+    election = "2014_Senate_Election"
+    winner = "winning_pct";
+    //president = "Democratic Party"
+    loser = "losing_pct";
+    //runner_up = "Republican Party"
+    //year = "Dem_Margin_12";
+    new_category = 2014
+  
 } else if (category == 2016){
-    winner = "Trump_Pct_16";
-    president = "Trump"
-    loser = "Clinton_Pct_16";
-    runner_up = "Clinton"
-    year = "Dem_Margin_16";
+    election = "2016_Senate_Election"
+    winner = "winning_pct";
+    //president = "Democratic Party"
+    loser = "losing_pct";
+    //runner_up = "Republican Party"
+    //year = "Dem_Margin_16";
     new_category = 2016
 
-}else  {
-    winner = "Biden_Pct_20";
-    president = "Biden"
-    loser = "Trump_Pct_20";
-    runner_up = "Trump"
-    year = "Dem_Margin_20";
+}
+else if (category == 2018){
+    election = "2018_Senate_Election"
+    winner = "winning_pct";
+    //president = "Democratic Party"
+    loser = "losing_pct";
+    //runner_up = "Republican Party"
+    //year = "Dem_Margin_16";
+    new_category = 2018
+
+}
+else  {
+    election = "2020_Senate_Election"
+    winner = "winning_pct";
+    //president = "Democratic Party"
+    loser = "losing_pct";
+    //runner_up = "Republican Party"
+    //year = "Dem_Margin_20";
     new_category = 2020
   }
 
+special_election =  `${category}`+ "_Senate_Special" ; 
+//`${election}`
+//${parseFloat(category)}
 
-
-
-var query_url = "https://zach-spahr-politics.herokuapp.com/senate_info_api"
+var query_url = "http://127.0.0.1:5000/senate_info_api"
 
   d3.json(query_url, function(data) {
       senate_data = data
+      console.log(senate_data.propertie)
       console.log(senate_data);
       L.geoJson(senate_data).addTo(map);
-     
+         
       
       //if (legend instanceof L.Control) { map.removeControl(legend); }
       //if (info instanceof L.Control) { map.removeControl(info); }
@@ -92,21 +112,30 @@ var query_url = "https://zach-spahr-politics.herokuapp.com/senate_info_api"
         };
 
     info.update = function (props) {
-    this._div.innerHTML = '<h4>State Election Results</h4>' +  (props ?
-        '<b>' + props.name + "<br>" + `</b> ${category} ${president} Vote Share:<br />` + parseFloat(props["Past_Election_Results"][`${winner}`]).toFixed(2) + '%</b> <br />' + `</b> ${category} ${runner_up}  Vote Share:<br />` + parseFloat(props["Past_Election_Results"][`${loser}`]).toFixed(2) + '%</b> <br />'
+    this._div.innerHTML = '<h4>State Election Results</h4>' +  
+    (props ["Election_Data_Points"][`${special_election}`] == null ?
+        '<b>' + props.name + "<br>" + `</b> ${props["Election_Data_Points"][`${election}`]["winning_candidate"]} (${props["Election_Data_Points"][`${election}`]["winning_party"]}):<br />` 
+        + parseFloat(props["Election_Data_Points"][`${election}`][`${winner}`]).toFixed(2) + '%</b> <br />' + `</b> ${props["Election_Data_Points"][`${election}`]["losing_candidate"]} (${props["Election_Data_Points"][`${election}`]["losing_party"]}):<br />` 
+        + parseFloat(props["Election_Data_Points"][`${election}`][`${loser}`]).toFixed(2) + '%</b> <br />' 
+       : props?
+        '<b>' + props.name + "<br>" + `</b> ${props["Election_Data_Points"][`${election}`]["winning_candidate"]} (${props["Election_Data_Points"][`${election}`]["winning_party"]}):<br />` + parseFloat(props["Election_Data_Points"][`${election}`][`${winner}`]).toFixed(2) + '%</b> <br />' + `</b> ${props["Election_Data_Points"][`${election}`]["losing_candidate"]} (${props["Election_Data_Points"][`${election}`]["losing_party"]}):<br />` + parseFloat(props["Election_Data_Points"][`${election}`][`${loser}`]).toFixed(2) + '%</b> <br />'+
+        '<b>' + 'Special Election' + "<br>" + `</b> ${props["Election_Data_Points"][`${special_election}`]["winning_candidate"]} (${props["Election_Data_Points"][`${special_election}`]["winning_party"]}):<br />` + 
+        parseFloat(props["Election_Data_Points"][`${special_election}`][`${winner}`]).toFixed(2) + '%</b> <br />' + `</b> ${props["Election_Data_Points"][`${special_election}`]["losing_candidate"]} (${props["Election_Data_Points"][`${special_election}`]["losing_party"]}):<br />` 
+        + parseFloat(props["Election_Data_Points"][`${special_election}`][`${loser}`]).toFixed(2) + '%</b> <br />'
         : 'Hover over a state');
         };
         
     function getColor(d) {
-        return d > 30 ? '#0000ff' :
-                d > 20  ? '#3233c4' :
-                d > 10  ? '#3300cc' :
-                d > 0  ? '#4d00b2' :
-                d > -10  ? '#bf0040' :
-                d > -20  ? '#e6001a' :
-                d < -20   ? '#ff0000' :
-                            '#ff0000';
+        return d == "Republican" ? '#ff1a1a' :
+                d =="Democratic"  ? '#0000ff' :
+                d == "DFL"  ? '#0000ff' :
+                d == "Democratic-NPL"  ? '#0000ff' :
+                d == "Republican write-in"  ? '#ff1a1a' :
+                d == "Independent"   ? '#0000ff' :
+                d == "None" ? '#808080' :
+                            '#000000';
         }
+        // winning parties are None, Democratic, Republican, DFL, Republican write-in, Independent
         //750,300,100,50,30
     function style(feature) {
         return {
@@ -115,7 +144,7 @@ var query_url = "https://zach-spahr-politics.herokuapp.com/senate_info_api"
         color: 'white',
         dashArray: '3',
         fillOpacity: 0.7,
-        fillColor: getColor(feature.properties.Past_Election_Results[`${year}`])
+        fillColor: getColor(feature.properties.Election_Data_Points[`${election}`]["winning_party"])
             };
         }
         function highlightFeature(e) {

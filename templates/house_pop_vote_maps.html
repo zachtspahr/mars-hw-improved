@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>2018 House Maps</title>
+    <title>Senate Maps</title>
 
   <!-- Leaflet JS & CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -77,7 +77,6 @@ body {background-color: #737685;};
 
     <br>
     
-    
   <header class="header">
     <h1 class="header1 fadeInDown animated" style="color: rgba(7, 17, 12, 0.692); text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Zach's Politics Data Site</h1>
     <h2 class="header2 fadeInDown animated" style="color: rgba(17, 6, 27, 0.692);text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" > Providing Data Sets and Analysis of 2020 Election Races</h2>
@@ -128,9 +127,13 @@ body {background-color: #737685;};
         <center>   
         <select class= "select" id="categories">
         <option> Select Category</option>
-        <option value="2012"> 2012 Presidential Results by House District</option>
-        <option value="2016"> 2016 Presidential Results by House District</option>
-        <option value="2020"> 2020 Presidential Results by House District</option>
+        <option value="2008"> 2008 House Popular Vote by State</option>
+        <option value="2010"> 2010 House Popular Vote by State</option>
+        <option value="2012"> 2012 House Popular Vote by State</option>
+        <option value="2014"> 2014 House Popular Vote by State</option>
+        <option value="2016"> 2016 House Popular Vote by State</option>
+        <option value="2018"> 2018 House Popular Vote by State</option>
+        <option value="2020"> 2020 House Popular Vote by State</option>
         
     
         </select>
@@ -155,7 +158,9 @@ body {background-color: #737685;};
 
   <!-- API key -->
   <!-- <script src="{{ url_for('static', filename='config.js') }}"></script> -->
-  <script src="{{ url_for('static', filename='presidential_maps_cd2.js') }}"></script>
+  <script src="{{ url_for('static', filename='house_pop_vote_maps4.js') }}"></script>
+  <!--script type="text/javascript" src="house_maps19.js"></script-->
+   <!-- New Line Tested to get this this thing going -->
   
   <!-- Our JS -->
   

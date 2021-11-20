@@ -117,6 +117,11 @@ def api_senate_info_endpoint():
 
 
 
+@zek_app.route("/president_senate_api")
+def president_senate_maps_endpoint():
+    new_states_data2 = db.senate_2021_data.find_one()
+    return (JSONEncoder().encode(new_states_data2))
+
 
 @zek_app.route("/president_dc_api")
 def dc_senate_maps_endpoint():
@@ -153,10 +158,17 @@ def api_house_map2():
 @zek_app.route("/house_districts_demographics")
 def api_house_map_new():
     return render_template('house_maps_demographics.html')
+@zek_app.route("/senate_maps")
+def senate_maps_info():
+    return render_template('senate_maps.html')
 
 @zek_app.route("/president_cd_maps")
 def api_president_cd_map():
     return render_template('president_cd_maps.html')
+
+@zek_app.route("/house_pop_maps")
+def api_house_pop_vote_map():
+    return render_template('house_pop_vote_maps.html')
 
 @zek_app.route("/test")
 def insert():
@@ -165,4 +177,5 @@ def insert():
 
 if __name__ == "__main__":
     zek_app.run(debug=True)
+
 

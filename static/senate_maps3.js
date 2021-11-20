@@ -19,57 +19,74 @@ var category = selectedCategory.property("value");
 console.log(category);
 
 
-if (category == 2000) {
-    winner = "Bush_Pct_00";
-    president = "Bush"
-    loser = "Gore_Pct_00";
-    runner_up = "Gore"
-    year = "Dem_Margin_00";
-    new_category = 2000
-  } else if (category == 2004) {
-    winner = "Bush_Pct_04";
-    president = "Bush"
-    loser = "Kerry_Pct_04";
-    runner_up = "Kerry"
-    year = "Dem_Margin_04";
-    new_category = 2004
-  } else if (category == 2008) {
-    winner = "Obama_Pct_08";
-    president = "Obama"
-    loser = "McCain_Pct_08";
-    runner_up ="McCain"
-    year = "Dem_Margin_08";
+if (category == 2008) {
+    election = "2008_Senate_Election"
+    winner = "2008_Dem_Pct";
+    president = "Democrat"
+    loser = "2008_GOP_Pct";
+    runner_up = "Republican"
+    //year = "Dem_Margin_00";
     new_category = 2008
-  
-  }else if (category == 2012) {
-    winner = "Obama_Pct_12";
-    president = "Obama"
-    loser = "Romney_Pct_12";
-    runner_up = "Romney"
-    year = "Dem_Margin_12";
+  } else if (category == 2010) {
+    election = "Senate_Election"
+    winner = "Dem_Pct_10";
+    president = "Democrat"
+    loser = "GOP_Pct_10";
+    runner_up = "Republican"
+    //year = "Dem_Margin_04";
+    new_category = 2010
+  } else if (category == 2012) {
+    election = "2012_Senate_Election"
+    winner = "2012_Dem_Pct";
+    president = "Democrat"
+    loser = "2012_GOP_Pct";
+    runner_up = "Republican"
+    //year = "Dem_Margin_08";
     new_category = 2012
   
+  }else if (category == 2014) {
+    election = "2014_Senate_Election"
+    winner = "2014_Dem_Pct";
+    president = "Democrat"
+    loser = "2014_GOP_Pct";
+    runner_up = "Republican"
+    //year = "Dem_Margin_12";
+    new_category = 2014
+  
 } else if (category == 2016){
-    winner = "Trump_Pct_16";
-    president = "Trump"
-    loser = "Clinton_Pct_16";
-    runner_up = "Clinton"
-    year = "Dem_Margin_16";
+    election = "2016_Senate_Election"
+    winner = "2016_Dem_Pct";
+    president = "Democrat"
+    loser = "2016_GOP_Pct";
+    runner_up = "Republican"
+    //year = "Dem_Margin_16";
     new_category = 2016
 
-}else  {
-    winner = "Biden_Pct_20";
-    president = "Biden"
-    loser = "Trump_Pct_20";
-    runner_up = "Trump"
-    year = "Dem_Margin_20";
+}
+else if (category == 2018){
+    election = "2018_Senate_Election"
+    winner = "2018_Dem_Pct";
+    president = "Democrat"
+    loser = "2018_GOP_Pct";
+    runner_up = "Republican"
+    //year = "Dem_Margin_16";
+    new_category = 2018
+
+}
+else  {
+    election = "2020_Senate_Election"
+    winner = "2020_Dem_Pct";
+    president = "Democratic Party"
+    loser = "2020_GOP_Pct";
+    runner_up = "Republican Party"
+    //year = "Dem_Margin_20";
     new_category = 2020
   }
 
 
 
 
-var query_url = "https://zach-spahr-politics.herokuapp.com/senate_info_api"
+var query_url = "http://127.0.0.1:5000/senate_info_api"
 
   d3.json(query_url, function(data) {
       senate_data = data
@@ -105,6 +122,7 @@ var query_url = "https://zach-spahr-politics.herokuapp.com/senate_info_api"
                 d > -10  ? '#bf0040' :
                 d > -20  ? '#e6001a' :
                 d < -20   ? '#ff0000' :
+                d = "None" ? '#808080' :
                             '#ff0000';
         }
         //750,300,100,50,30
