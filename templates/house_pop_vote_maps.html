@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Senate Maps</title>
+    <title>House Popular Vote Maps </title>
 
   <!-- Leaflet JS & CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -85,8 +85,8 @@ body {background-color: #737685;};
 </div>   
 
 <div>
-    <h4 style="color: rgb(90, 19, 19);text-align: center;"> The map below features district-wide results from each state from the 2018 midterms and 2016 presidential election. This data is fed from a mongodb atlas database
-        and sent up through an endpoint using flask. </h4>
+    <h4 style="color: rgb(90, 19, 19);text-align: center;"> The map below features state-wide results of the house popular vote from 2008-2020. This data is fed from a mongodb atlas database
+        and sent up through an endpoint using flask. The interactive map was made using the d3 and leaflet libraries. </h4>
 </div>
 
   <main>
@@ -108,7 +108,7 @@ body {background-color: #737685;};
 
         <center> 
           <h4 style="font-size:25px; color: rgba(29, 0, 29, 0.692); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-            Select Year / Demographic info</h4>
+            Select Year</h4>
           </center>
 
         <style> 
@@ -126,7 +126,7 @@ body {background-color: #737685;};
         </style>
         <center>   
         <select class= "select" id="categories">
-        <option> Select Category</option>
+        <option> Select Election Year</option>
         <option value="2008"> 2008 House Popular Vote by State</option>
         <option value="2010"> 2010 House Popular Vote by State</option>
         <option value="2012"> 2012 House Popular Vote by State</option>
