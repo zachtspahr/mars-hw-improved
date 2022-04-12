@@ -49,7 +49,7 @@ class JSONEncoder(json.JSONEncoder):
 
 @zek_app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('home_page.html')
 
 @zek_app.route("/state_maps_api")
 def api_senate_maps_endpoint():
