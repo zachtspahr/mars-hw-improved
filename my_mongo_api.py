@@ -550,6 +550,229 @@ def vif_tables(dadumle):
     vifs_df = pd.DataFrame(vifs_dict["vifs"][zek]).to_html()
     return vifs_df
 
+@zek_app.route("/most_recent_selected_data")
+def user_selected_data():
+    #fix exceptions here
+    user_data = db.user_variables.find()
+    user_dict = {"variables":[]}
+
+    user_dict ["variables"]
+    for item in user_data:
+        user_dict["variables"].append(item)
+    last_entry = user_dict["variables"][len(user_dict["variables"])-1]
+    return (jsonify(last_entry))
+
+@zek_app.route("/map_model_geojson")
+#fix exceptions here
+def user_input_geojson():
+    CONNECTION_STRING = f'mongodb+srv://{username}:{mot_de_passe}@cluster0-zgmov.mongodb.net/test?retryWrites=true&w=majority'
+    client = pymongo.MongoClient(CONNECTION_STRING)
+    db = client.get_database('geojsons')
+    user_collection = pymongo.collection.Collection(db, 'test_collection')
+
+
+    user_data = db.user_variables.find()
+    user_dict = {"variables":[]}
+
+    user_dict ["variables"]
+    for item in user_data:
+        user_dict["variables"].append(item)
+    recent_variables = user_dict["variables"][len(user_dict["variables"])-1]["selected_variables"]
+    if len(recent_variables)==0:
+        url = "https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/2020_congressional_data.json"
+        response = requests.get(url)
+        cd_json = response.json()
+    else:
+        some_data = pd.read_csv("https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/models_edited_president.csv")
+    #some_data[recent_variables]
+
+        X = some_data[recent_variables]
+        y = some_data["Biden_Vote"]
+        Z= some_data["Trump_Vote_20"]
+        zek = some_data["Biden_margin"]
+        X2 = sm.add_constant(X)
+        est = sm.OLS(y, X2)
+        est2 = est.fit()
+        est3 = sm.OLS(Z, X2)
+        est4= est3.fit()
+        est5 = sm.OLS(zek, X2)
+        est6= est5.fit()
+
+    
+   
+
+
+        coef = pd.DataFrame(est2.params).iloc[:,0].tolist()
+        new_df = X
+        biden_expected_vote = []
+        constant = coef[0]
+        for i in range(len(new_df.iloc[:,0].tolist())):
+            zek = constant
+            for j in range(len(coef)-1):
+                zek = zek + (new_df.iloc[i,j]*coef[j+1])
+            biden_expected_vote.append(zek)
+    
+        trying = pd.DataFrame()
+        trying["CD_ID"]= some_data["CD_ID"]
+        trying["Biden_Expected_Vote"]= biden_expected_vote
+        trying["Biden_Actual_Vote"] = some_data["Biden_Vote"]
+        trying["Biden_Residual"]= trying["Biden_Actual_Vote"]-trying["Biden_Expected_Vote"]
+
+
+        coef2 = pd.DataFrame(est4.params).iloc[:,0].tolist()
+        new_df2 = X
+        trump_expected_vote = []
+        constant2 = coef2[0]
+        for k in range(len(new_df2.iloc[:,0].tolist())):
+            zek2 = constant2
+            for l in range(len(coef2)-1):
+                zek2 = zek2 + (new_df2.iloc[k,l]*coef2[l+1])
+            trump_expected_vote.append(zek2)
+        trying["Trump_Expected_Vote"]= trump_expected_vote
+        trying["Trump_Actual_Vote"] = some_data["Trump_Vote_20"]
+        trying["Trump_Residual"]= trying["Trump_Actual_Vote"]-trying["Trump_Expected_Vote"]
+
+        coef3 = pd.DataFrame(est6.params).iloc[:,0].tolist()
+        new_df3 = X
+        biden_predicted_margin = []
+        constant3 = coef3[0]
+        for w in range(len(new_df3.iloc[:,0].tolist())):
+            zek3 = constant3
+            for v in range(len(coef3)-1):
+                zek3 = zek3 + (new_df3.iloc[w,v]*coef3[v+1])
+            biden_predicted_margin.append(zek3)
+        trying["Predicted_Biden_Margin"]= biden_predicted_margin
+        trying["Actual_Biden_Margin"] = some_data["Biden_margin"]
+        trying["Margin_Residual"]= trying["Actual_Biden_Margin"]-trying["Predicted_Biden_Margin"]
+        model_list = trying.to_dict(orient="records")
+        url = "https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/2020_congressional_data.json"
+        response = requests.get(url)
+        cd_json = response.json()
+        for i in range(len(cd_json["features"])):
+            cd_json["features"][i]["properties"].update(model_list[i])
+    return (JSONEncoder().encode(cd_json))
+
+@zek_app.route("/regression_table")
+#fix exceptions here
+def user_input_table():
+    CONNECTION_STRING = f'mongodb+srv://{username}:{mot_de_passe}@cluster0-zgmov.mongodb.net/test?retryWrites=true&w=majority'
+    client = pymongo.MongoClient(CONNECTION_STRING)
+    db = client.get_database('geojsons')
+    user_collection = pymongo.collection.Collection(db, 'test_collection')
+
+
+    user_data = db.user_variables.find()
+    user_dict = {"variables":[]}
+
+    user_dict ["variables"]
+    for item in user_data:
+        user_dict["variables"].append(item)
+    recent_variables = user_dict["variables"][len(user_dict["variables"])-1]["selected_variables"]
+    if len(recent_variables)==0:
+        url = "https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/2020_congressional_data.json"
+        response = requests.get(url)
+        cd_json = response.json()
+        reg_tables =("No Variables Selected","No Variables Selected","No Variables Selected")
+        equations= ["No Variables Selected","No Variables Selected","No Variables Selected"]
+        cd_merged = pd.read_csv("https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/models_edited_president.csv").to_html()
+        cov_params = ("","","")
+    else:
+
+
+        some_data = pd.read_csv("https://raw.githubusercontent.com/zachtspahr/zachtspahr.github.io/master/models_edited_president.csv")
+        some_data[recent_variables]
+
+        X = some_data[recent_variables]
+        y = some_data["Biden_Vote"]
+        Z= some_data["Trump_Vote_20"]
+        zek = some_data["Biden_margin"]
+        X2 = sm.add_constant(X)
+        est = sm.OLS(y, X2)
+        est2 = est.fit()
+        est2_html = est2.summary().as_html()
+        est3 = sm.OLS(Z, X2)
+        est4= est3.fit()
+        est4_html = est4.summary().as_html()
+        est5 = sm.OLS(zek, X2)
+        est6= est5.fit()
+        est6_html = est6.summary().as_html()
+        reg_tables =(est2_html,est4_html,est6_html)
+    
+        coef = pd.DataFrame(est2.params).iloc[:,0].tolist()
+        new_df = X
+        biden_expected_vote = []
+        constant = coef[0]
+        for i in range(len(new_df.iloc[:,0].tolist())):
+            zek = constant
+            for j in range(len(coef)-1):
+                zek = zek + (new_df.iloc[i,j]*coef[j+1])
+            biden_expected_vote.append(zek)
+    
+        trying = pd.DataFrame()
+        trying["CD_ID"]= some_data["CD_ID"]
+        trying["Biden_Expected_Vote"]= biden_expected_vote
+        trying["Biden_Actual_Vote"] = some_data["Biden_Vote"]
+        trying["Biden_Residual"]= trying["Biden_Actual_Vote"]-trying["Biden_Expected_Vote"]
+
+
+        coef2 = pd.DataFrame(est4.params).iloc[:,0].tolist()
+        new_df2 = X
+        trump_expected_vote = []
+        constant2 = coef2[0]
+        for k in range(len(new_df2.iloc[:,0].tolist())):
+            zek2 = constant2
+            for l in range(len(coef2)-1):
+                zek2 = zek2 + (new_df2.iloc[k,l]*coef2[l+1])
+            trump_expected_vote.append(zek2)
+        trying["Trump_Expected_Vote"]= trump_expected_vote
+        trying["Trump_Actual_Vote"] = some_data["Trump_Vote_20"]
+        trying["Trump_Residual"]= trying["Trump_Actual_Vote"]-trying["Trump_Expected_Vote"]
+
+        coef3 = pd.DataFrame(est6.params).iloc[:,0].tolist()
+        new_df3 = X
+        biden_predicted_margin = []
+        constant3 = coef3[0]
+        for w in range(len(new_df3.iloc[:,0].tolist())):
+            zek3 = constant3
+            for v in range(len(coef3)-1):
+                zek3 = zek3 + (new_df3.iloc[w,v]*coef3[v+1])
+            biden_predicted_margin.append(zek3)
+        trying["Predicted_Biden_Margin"]= biden_predicted_margin
+        trying["Actual_Biden_Margin"] = some_data["Biden_margin"]
+        trying["Margin_Residual"]= trying["Actual_Biden_Margin"]-trying["Predicted_Biden_Margin"]
+        cd_ids=some_data["CD_ID"].tolist()
+        new_df_copy = X.copy()
+        for i in range(len(cd_ids)):
+            new_df_copy.loc[i,"CD_ID"]= cd_ids[i]
+        cd_merged = pd.merge(trying,new_df_copy,on= "CD_ID",sort=False).to_html()
+
+        params_df = pd.DataFrame(est2.params).reset_index() 
+        params_df2 = pd.DataFrame(est4.params).reset_index()
+        params_df3 = pd.DataFrame(est6.params).reset_index()
+        cov_params_df = pd.DataFrame(est2.normalized_cov_params).reset_index() 
+        cov_params_df = cov_params_df.rename(columns={"index": "Variables"})
+        cov_params_df2 = pd.DataFrame(est4.normalized_cov_params).reset_index() 
+        cov_params_d2 = cov_params_df2.rename(columns={"index": "Variables"})
+        cov_params_df3 = pd.DataFrame(est6.normalized_cov_params).reset_index() 
+        cov_params_df3 = cov_params_df3.rename(columns={"index": "Variables"})
+        
+        zek=f"{constant}"
+        zek2 = f"{constant2}"
+        zek3=f"{constant3}" 
+        for i in range(len(params_df["index"].tolist())-1):
+            zek= zek + f' + {params_df.loc[i+1,0].round(2)} * {params_df.loc[i+1,"index"]}'
+            zek2= zek2 + f' + {params_df2.loc[i+1,0].round(2)} * {params_df2.loc[i+1,"index"]}'
+            zek3= zek3 + f' + {params_df3.loc[i+1,0].round(2)} * {params_df3.loc[i+1,"index"]}'
+    
+
+
+
+#params_df
+        equations= [zek,zek2,zek3]
+        cov_params =(cov_params_df.to_html(),cov_params_df2.to_html(),cov_params_df3.to_html())
+
+    return render_template("big_table_rendering.html",cd_merged = cd_merged,reg_tables=reg_tables,equations=equations,cov_params=cov_params)
+
 if __name__ == "__main__":
     zek_app.run(debug=True)
 
