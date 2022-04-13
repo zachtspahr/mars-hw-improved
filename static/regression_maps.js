@@ -26,7 +26,7 @@ console.log(category);
 $(".leaflet-interactive").remove();
 
 
-if (category == 2020) {
+if (category == "Biden") {
     winner = "Biden_Expected_Vote";
     winner_actual = "Biden_Actual_Vote"
     president = "Biden";
@@ -38,10 +38,32 @@ if (category == 2020) {
     new_category = 2020;
     
 
-  } else {
-    console.log("There has been an error")
-    //removeFeature(L.geoJson(),id);
-    //map.clearLayers();
+  } else if (category == "Trump"){
+    winner = "Biden_Expected_Vote";
+    winner_actual = "Biden_Actual_Vote"
+    president = "Biden";
+    loser = "Trump_Expected_Vote";
+    loser_acutal = "Trump_Actual_Vote"
+    runner_up = "Trump";
+    year = "Predicted_Biden_Margin";
+    margin_actual= "Actual_Biden_Margin"
+    new_category = 2020;
+
+}
+else if  (category == "Biden_Margin"){
+    winner = "Biden_Expected_Vote";
+    winner_actual = "Biden_Actual_Vote"
+    president = "Biden";
+    loser = "Trump_Expected_Vote";
+    loser_acutal = "Trump_Actual_Vote"
+    runner_up = "Trump";
+    year = "Predicted_Biden_Margin";
+    margin_actual= "Actual_Biden_Margin"
+    new_category = 2020;
+
+  }
+  else  {
+    console.log("No category selected")
   }
 
 
