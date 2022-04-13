@@ -13,7 +13,7 @@ werkzeug==0.15.3
 requests==2.22.0
 requests-oauthlib==1.2.0
 pandas==0.24.2
-numpy==1.16.4
+numpy==1.21.0
 json5==0.8.4
 jsonschema==3.0.1
 appnope==0.1.0
