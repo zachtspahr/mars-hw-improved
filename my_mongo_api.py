@@ -359,39 +359,39 @@ def var_list(form):
       bob = bob.rename(columns={0: columns[0], 1: columns[1],2: columns[2], 3: columns[3],4: columns[4], 5: columns[5],
                    6:columns[6]})
       bob = bob.iloc[1:,:]
-      bob["vifs"]=vif_list
+      bob["Variance Inflation Factor"]=vif_list
       bob["P-Value"]=bob["P-Value"].astype(float)
-      bob["vifs"]=bob["vifs"].astype(float)
+      bob["Variance Inflation Factor"]=bob["Variance Inflation Factor"].astype(float)
       bob.loc[bob['P-Value'] <= .05, 'Significant?'] = 'Yes' 
       bob.loc[bob['P-Value'] > .05, 'Significant?'] = 'No'
-      bob.loc[bob['vifs'] <= 5, 'Covariance Problem?'] = 'No' 
-      bob.loc[bob['vifs'] > 5, 'Covariance Problem?'] = 'Yes'
+      bob.loc[bob['Variance Inflation Factor'] <= 5, 'Covariance Problem?'] = 'No' 
+      bob.loc[bob['Variance Inflation Factor'] > 5, 'Covariance Problem?'] = 'Yes'
       bob = bob.to_html()
 
       bob2 = pd.read_html(est4.summary().tables[1].as_html())[0]
       bob2 = bob2.rename(columns={0: columns[0], 1: columns[1],2: columns[2], 3: columns[3],4: columns[4], 5: columns[5],
                    6:columns[6]})
       bob2 = bob2.iloc[1:,:]
-      bob2["vifs"]=vif_list
+      bob2["Variance Inflation Factor"]=vif_list
       bob2["P-Value"]=bob2["P-Value"].astype(float)
-      bob2["vifs"]=bob2["vifs"].astype(float)
+      bob2["Variance Inflation Factor"]=bob2["Variance Inflation Factor"].astype(float)
       bob2.loc[bob2['P-Value'] <= .05, 'Significant?'] = 'Yes' 
       bob2.loc[bob2['P-Value'] > .05, 'Significant?'] = 'No'
-      bob2.loc[bob2['vifs'] <= 5, 'Covariance Problem?'] = 'No' 
-      bob2.loc[bob2['vifs'] > 5, 'Covariance Problem?'] = 'Yes'
+      bob2.loc[bob2['Variance Inflation Factor'] <= 5, 'Covariance Problem?'] = 'No' 
+      bob2.loc[bob2['Variance Inflation Factor'] > 5, 'Covariance Problem?'] = 'Yes'
       bob2 = bob2.to_html()
 
       bob3 = pd.read_html(est6.summary().tables[1].as_html())[0]
       bob3 = bob3.rename(columns={0: columns[0], 1: columns[1],2: columns[2], 3: columns[3],4: columns[4], 5: columns[5],
                    6:columns[6]})
       bob3 = bob3.iloc[1:,:]
-      bob3["vifs"]=vif_list
+      bob3["Variance Inflation Factor"]=vif_list
       bob3["P-Value"]=bob3["P-Value"].astype(float)
-      bob3["vifs"]=bob3["vifs"].astype(float)
+      bob3["Variance Inflation Factor"]=bob3["Variance Inflation Factor"].astype(float)
       bob3.loc[bob3['P-Value'] <= .05, 'Significant?'] = 'Yes' 
       bob3.loc[bob3['P-Value'] > .05, 'Significant?'] = 'No'
-      bob3.loc[bob3['vifs'] <= 5, 'Covariance Problem?'] = 'No' 
-      bob3.loc[bob3['vifs'] > 5, 'Covariance Problem?'] = 'Yes'
+      bob3.loc[bob3['Variance Inflation Factor'] <= 5, 'Covariance Problem?'] = 'No' 
+      bob3.loc[bob3['Variance Inflation Factor'] > 5, 'Covariance Problem?'] = 'Yes'
       bob3 = bob3.to_html()
       params_df = pd.DataFrame(est2.params).reset_index()
       params_df2 = pd.DataFrame(est4.params).reset_index()
@@ -460,39 +460,39 @@ def var_list(form):
       bob = bob.rename(columns={0: columns[0], 1: columns[1],2: columns[2], 3: columns[3],4: columns[4], 5: columns[5],
                    6:columns[6]})
       bob = bob.iloc[1:,:]
-      bob["vifs"]=vif_list
+      bob["Variance Inflation Factor"]=vif_list
       bob["P-Value"]=bob["P-Value"].astype(float)
-      bob["vifs"]=bob["vifs"].astype(float)
+      bob["Variance Inflation Factor"]=bob["Variance Inflation Factor"].astype(float)
       bob.loc[bob['P-Value'] <= .05, 'Significant?'] = 'Yes' 
       bob.loc[bob['P-Value'] > .05, 'Significant?'] = 'No'
-      bob.loc[bob['vifs'] <= 5, 'Covariance Problem?'] = 'No' 
-      bob.loc[bob['vifs'] > 5, 'Covariance Problem?'] = 'Yes'
+      bob.loc[bob['Variance Inflation Factor'] <= 5, 'Covariance Problem?'] = 'No' 
+      bob.loc[bob['Variance Inflation Factor'] > 5, 'Covariance Problem?'] = 'Yes'
       bob = bob.to_html()
 
       bob2 = pd.read_html(est4.summary().tables[1].as_html())[0]
       bob2 = bob2.rename(columns={0: columns[0], 1: columns[1],2: columns[2], 3: columns[3],4: columns[4], 5: columns[5],
                    6:columns[6]})
       bob2 = bob2.iloc[1:,:]
-      bob2["vifs"]=vif_list
+      bob2["Variance Inflation Factor"]=vif_list
       bob2["P-Value"]=bob2["P-Value"].astype(float)
-      bob2["vifs"]=bob2["vifs"].astype(float)
+      bob2["Variance Inflation Factor"]=bob2["Variance Inflation Factor"].astype(float)
       bob2.loc[bob2['P-Value'] <= .05, 'Significant?'] = 'Yes' 
       bob2.loc[bob2['P-Value'] > .05, 'Significant?'] = 'No'
-      bob2.loc[bob2['vifs'] <= 5, 'Covariance Problem?'] = 'No' 
-      bob2.loc[bob2['vifs'] > 5, 'Covariance Problem?'] = 'Yes'
+      bob2.loc[bob2['Variance Inflation Factor'] <= 5, 'Covariance Problem?'] = 'No' 
+      bob2.loc[bob2['Variance Inflation Factor'] > 5, 'Covariance Problem?'] = 'Yes'
       bob2 = bob2.to_html()
 
       bob3 = pd.read_html(est6.summary().tables[1].as_html())[0]
       bob3 = bob3.rename(columns={0: columns[0], 1: columns[1],2: columns[2], 3: columns[3],4: columns[4], 5: columns[5],
                    6:columns[6]})
       bob3 = bob3.iloc[1:,:]
-      bob3["vifs"]=vif_list
+      bob3["Variance Inflation Factor"]=vif_list
       bob3["P-Value"]=bob3["P-Value"].astype(float)
-      bob3["vifs"]=bob3["vifs"].astype(float)
+      bob3["Variance Inflation Factor"]=bob3["Variance Inflation Factor"].astype(float)
       bob3.loc[bob3['P-Value'] <= .05, 'Significant?'] = 'Yes' 
       bob3.loc[bob3['P-Value'] > .05, 'Significant?'] = 'No'
-      bob3.loc[bob3['vifs'] <= 5, 'Covariance Problem?'] = 'No' 
-      bob3.loc[bob3['vifs'] > 5, 'Covariance Problem?'] = 'Yes'
+      bob3.loc[bob3['Variance Inflation Factor'] <= 5, 'Covariance Problem?'] = 'No' 
+      bob3.loc[bob3['Variance Inflation Factor'] > 5, 'Covariance Problem?'] = 'Yes'
       bob3 = bob3.to_html()
 
       params_df = pd.DataFrame(est2.params).reset_index()
@@ -531,6 +531,24 @@ def var_list(form):
   # this is tuple with 3 data frames and 3 equations, 3 r squared value
 
   return (reg_variables)
+
+def vif_tables(dadumle):
+    #fix exceptions here
+
+    CONNECTION_STRING = f'mongodb+srv://{username}:{mot_de_passe}@cluster0-zgmov.mongodb.net/test?retryWrites=true&w=majority'
+    print(username)
+    client = pymongo.MongoClient(CONNECTION_STRING)
+    #print(username)
+    db = client.get_database('geojsons')
+
+    vifs_dict={"vifs":[]}
+    vifs = db.vifs.find()
+    for item in vifs:
+        vifs_dict["vifs"].append(item["vifs"])
+    zek = len(vifs_dict["vifs"])-1
+
+    vifs_df = pd.DataFrame(vifs_dict["vifs"][zek]).to_html()
+    return vifs_df
 
 if __name__ == "__main__":
     zek_app.run(debug=True)
