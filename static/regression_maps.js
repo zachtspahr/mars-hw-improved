@@ -28,37 +28,25 @@ $(".leaflet-interactive").remove();
 
 if (category == "Biden") {
     winner = "Biden_Expected_Vote";
-    winner_actual = "Biden_Actual_Vote"
+    winner_actual = "Biden_Actual_Vote";
     president = "Biden";
-    loser = "Trump_Expected_Vote";
-    loser_acutal = "Trump_Actual_Vote"
-    runner_up = "Trump";
-    year = "Predicted_Biden_Margin";
-    margin_actual= "Actual_Biden_Margin"
+    elect_type = "Vote Share";
     new_category = 2020;
     
 
   } else if (category == "Trump"){
-    winner = "Biden_Expected_Vote";
-    winner_actual = "Biden_Actual_Vote"
-    president = "Biden";
-    loser = "Trump_Expected_Vote";
-    loser_acutal = "Trump_Actual_Vote"
-    runner_up = "Trump";
-    year = "Predicted_Biden_Margin";
-    margin_actual= "Actual_Biden_Margin"
+    winner = "Trump_Actual_Vote";
+    winner_actual = "Trump_Expected_Vote";
+    president = "Trump";
+    elect_type = "Vote Share"
     new_category = 2020;
 
 }
 else if  (category == "Biden_Margin"){
-    winner = "Biden_Expected_Vote";
-    winner_actual = "Biden_Actual_Vote"
+    winner = "Predicted_Biden_Margin";
+    winner_actual = "Actual_Biden_Margin";
     president = "Biden";
-    loser = "Trump_Expected_Vote";
-    loser_acutal = "Trump_Actual_Vote"
-    runner_up = "Trump";
-    year = "Predicted_Biden_Margin";
-    margin_actual= "Actual_Biden_Margin"
+    elect_type = "Margin";
     new_category = 2020;
 
   }
@@ -90,18 +78,18 @@ else if  (category == "Biden_Margin"){
 
     info.update = function (props) {
     this._div.innerHTML = '<h4> Election Results by House District</h4>' +  (props ?
-        '<b>' + props.district + "<br>" + `</b> Predicted ${category} ${president} Vote Share:<br />` + parseFloat(props[`${winner}`]).toFixed(2) + '%</b> <br />' + `</b>Predicted ${category} ${runner_up}  Vote Share:<br />` + parseFloat(props[`${loser}`]).toFixed(2) + '%</b> <br />'
+        '<b>' + props.district + "<br>" + `</b> Predicted ${new_category} ${president} ${elect_type}:<br />` + parseFloat(props[`${winner}`]).toFixed(2) + '%</b> <br />' + `</b>Actual ${new_category} ${president} ${elect_type}:<br />` + parseFloat(props[`${winner_actual}`]).toFixed(2) + '%</b> <br />'
         : 'Hover over a congressional district');
         };
         
     function getColor(d) {
-        return d > 30 ? '#0000ff' :
-                d > 20  ? '#3233c4' :
-                d > 10  ? '#3300cc' :
+        return d > 10 ? '#0000ff' :
+                d > 5  ? '#3233c4' :
+                d > 2.5  ? '#3300cc' :
                 d > 0  ? '#4d00b2' :
-                d > -10  ? '#bf0040' :
-                d > -20  ? '#e6001a' :
-                d < -20   ? '#ff0000' :
+                d > -2.5  ? '#bf0040' :
+                d > -5  ? '#e6001a' :
+                d < -10   ? '#ff0000' :
                             '#ff0000';
         }
         //750,300,100,50,30
@@ -112,7 +100,7 @@ else if  (category == "Biden_Margin"){
         color: 'white',
         dashArray: '3',
         fillOpacity: 0.7,
-        fillColor: getColor(feature.properties[`${year}`])
+        fillColor: getColor(feature.properties[`${winner_actual}`]-feature.properties[`${winner}`])
             };
         }
         function highlightFeature(e) {

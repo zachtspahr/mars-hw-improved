@@ -14,9 +14,6 @@ from bs4 import BeautifulSoup
 import urllib.request
 import urllib.request
 import math
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.linear_model import LinearRegression
-model = LinearRegression()
 import numpy as np
 from patsy import dmatrices
 import statsmodels.api as sm
