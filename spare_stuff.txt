@@ -54,3 +54,51 @@ def api_senate_info_endpoint():
                                                                            "Biden_plus_minus":senior_sen["Biden_plus_minus"].values.tolist()[i]})
 
     return (JSONEncoder().encode(new_states_data))
+
+
+
+Flask==1.1.1
+Flask-PyMongo==2.3.0
+dnspython==1.16.0
+pymongo==3.9.0
+pylint==2.3.1
+Unidecode==1.1.1
+certifi==2019.6.16
+chardet==4.0.0
+distributed==2021.1.1
+geojson==2.5.0
+gunicorn==20.0.4
+werkzeug==0.15.3
+requests==2.22.0
+requests-oauthlib==1.3.0
+NumPy== 1.20
+pandas==1.4.1
+json5==0.8.4
+jsonschema==3.0.1
+appnope==0.1.0
+click==6.7
+decorator==4.1.2
+ipython==7.16.3
+ipython-genutils==0.2.0
+itsdangerous==0.24
+jedi==0.11.0
+Jinja2==2.11.3
+MarkupSafe==2.0.1
+parso==0.1.0
+passlib==1.7.1
+pexpect==4.3.0
+pickleshare==0.7.4
+prompt-toolkit==1.0.15
+psycopg2==2.7.3.2
+ptyprocess==0.5.2
+Pygments==2.7.4
+simplegeneric==0.8.1
+six==1.11.0
+traitlets==4.3.2
+wcwidth==0.1.7
+BeautifulSoup4==4.9.0
+patsy==0.5.1
+pep8==1.7.1
+Cython==0.29
+SciPy== 1.3
+statsmodels==0.13.2
