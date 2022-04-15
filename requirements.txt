@@ -42,5 +42,5 @@ patsy==0.5.1
 pep8==1.7.1
 Cython==0.29
 SciPy==1.3
-statsmodels==0.13.2
-# comment
+statsmodels==0.12.2
+# comment here
