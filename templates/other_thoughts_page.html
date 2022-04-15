@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Demographic Info of House Districts  </title>
+    <title>Zach Spahr Politics Home</title>
     <link type="image/png" sizes="16x16" rel="icon" href="{{ url_for('static', filename='icons8-vote-16.png') }}">
 
   <!-- Leaflet JS & CSS -->
@@ -73,8 +73,28 @@ body {background-color: #737685;};
             </ul>
             
           </div>
+          <div class="dropdown" id ="hello2">
+            <button id ="hello2" class="btn btn-primary dropdown-toggle" style="color: #337ab7; text-align: center; background-color:transparent; border-color: transparent;" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-stats"></span>2020 Presidential Results Regression by House District</button>
+            
+            <ul class="dropdown-menu">
+              <li><a href="https://zach-spahr-politics.herokuapp.com/choose_regression">Regression Initiation Page</a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com/regression_table">Full Regression Output and Predictions </a></li>
+              
+            </ul>
       
         </div>   
+
+        <div class="dropdown" id ="hello3">
+          <button id ="hello2" class="btn btn-primary dropdown-toggle" style="color: #337ab7; text-align: center; background-color:transparent; border-color: transparent;" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-stats"></span>Other Random Musings</button>
+          
+          <ul class="dropdown-menu">
+            <li><a href="https://zach-spahr-politics.herokuapp.com/choose_regression">Formula 1</a></li>
+            <li><a href="https://zach-spahr-politics.herokuapp.com/regression_table">General Politics Thoughts </a></li>
+            
+          </ul>
+    
+      </div>   
+
 
     <br>
     
@@ -85,95 +105,3 @@ body {background-color: #737685;};
       <br><br>
       <h2 class="header2 fadeInDown animated" style="text-indent: 7cm; color: black;text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; " >Providing Data Sets and Analysis of 2020 Election Races</h2>
     </header>
-
-</div>   
-
-<div>
-    <h4 style="color: rgb(90, 19, 19);text-align: center;"> The map below features the demographic information (from census bureau) for each congressional district. 
-      This data is fed from a mongodb atlas database and sent up through an endpoint using flask. The purpose of this to show the different demographic info that
-      makes each congressional district unique in its own way. I have highlighted racial and education data because these two demographic traits have become increasingly
-      correlated with voter preferences.    </h4>
-</div>
-
-  <main>
-
-    <section class="posts">
-
-      <article class="post">
-
-        <div id="map1"></div>
-        <center>  
-          <b>
-            <h4 style="font-size:33px; color: rgba(29, 0, 29, 0.692); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-              House District</h4>
-          </b>
-        </center>
-        
-
-        <br>
-
-        <center> 
-          <h4 style="font-size:25px; color: rgba(29, 0, 29, 0.692); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-            Select Demographic info of districts</h4>
-          </center>
-
-        <style> 
-        .select {
-            font-size: 20px;
-            margin-top: 0;
-            margin-bottom: 10px;
-            vertical-align: baseline;
-            align-items: center;
-            align-self: center;
-            text-align: center;
-            width: 600px ;
-          }
-        
-        </style>
-        <center>   
-        <select class= "select" id="categories">
-        <option> Select Category</option>
-        <option value="white_pct"> Pct of district that is White</option>
-        <option value="black_pct"> Pct of district that is Black</option>
-        <option value="asian_pct"> Pct of district that is Asian</option>
-        <option value="hispanic_pct"> Pct of district that is Hispanic</option>
-        <option value="native_american_pct"> Pct of district that is native american</option>
-        <option value="other_race_pct"> Pct of district that is another race</option>
-        <option value="ba_pct"> Pct of district with a college degree</option>
-        <option value="white_college_pct"> Pct of district that is white with a college degree</option>
-        <option value="white_non_college_pct"> Pct of district that is white with no college degree</option>
-        <!-- option value="median_income"> Median Income of District</option-->
-        <!-- option value="cook_pvi"> 2018 Cook Partisan Lean</option-->
-        
-    
-        </select>
-      </center>
-
-        <br>
-        <br>
-
-    </article></section>
-
-    <br>
-    <br>
-
-  </main>
-  <!-- The div where we will inject our map -->
- <div id="map" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: relative;"> 
-   MAP<div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(-204.317px, 81.9961px, 0px);">
-    <div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer " style="z-index: 1; opacity: 1;">
-  <div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 17; transform: translate3d(-2400px, -900px, 0px) scale(2);"></div>
-  <div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 18; transform: translate3d(-800px, -250px, 0px) scale(1);">
-       
-
-  <!-- API key -->
-  <!-- <script src="{{ url_for('static', filename='config.js') }}"></script> -->
-  <script src="{{ url_for('static', filename='house_demo8.js') }}"></script>
-  <!--script type="text/javascript" src="house_maps19.js"></script-->
-   <!-- New Line Tested to get this this thing going -->
-  
-  <!-- Our JS -->
-  <!-- Our JS -->
-  
-</body>
-</html>

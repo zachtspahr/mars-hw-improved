@@ -62,6 +62,14 @@ def truncate(n, decimals=0):
 def index():
     return render_template('home_page.html')
 
+@zek_app.route("/formula_1")
+def formula_1():
+    return render_template('formula_1_page.html')
+
+@zek_app.route("/other_politics")
+def other_politics():
+    return render_template('other_thoughts_page.html')
+
 @zek_app.route("/state_maps_api")
 def api_senate_maps_endpoint():
     senate_map = db.senate_maps.find_one()
