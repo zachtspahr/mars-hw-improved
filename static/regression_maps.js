@@ -78,7 +78,8 @@ else if  (category == "Biden_Margin"){
 
     info.update = function (props) {
     this._div.innerHTML = '<h4> Election Results by House District</h4>' +  (props ?
-        '<b>' + props.district + "<br>" + `</b> Predicted ${new_category} ${president} ${elect_type}:<br />` + parseFloat(props[`${winner}`]).toFixed(2) + '%</b> <br />' + `</b>Actual ${new_category} ${president} ${elect_type}:<br />` + parseFloat(props[`${winner_actual}`]).toFixed(2) + '%</b> <br />'
+        '<b>' + props.district + "<br>" + `</b> Predicted ${new_category} ${president} ${elect_type}:<br />` + parseFloat(props[`${winner}`]).toFixed(2) + '%</b> <br />' + `</b>Actual ${new_category} ${president} ${elect_type}:<br />` + parseFloat(props[`${winner_actual}`]).toFixed(2) + '%</b> <br />' 
+
         : 'Hover over a congressional district');
         };
         
@@ -157,7 +158,7 @@ else if  (category == "Biden_Margin"){
            
         
             var div = L.DomUtil.create('div', 'info legend'),
-                grades = [-100, -20, -10, .001.toFixed(0), 10, 20, 30],
+                grades = [-10, -5, -2.5, .001.toFixed(0), 2.5, 5, 10],
                 labels = [],
                 from, to;
         
@@ -170,7 +171,7 @@ else if  (category == "Biden_Margin"){
                     from + (to ? ' &ndash; ' + to : ' + '));
             }
         
-            div.innerHTML = `<h4> ${new_category} Dem Margin</h4>` + labels.join('<br>');
+            div.innerHTML = `<h4> ${new_category} ${president} ${elect_type}<br> Performance  Relative to Expectations </h4>` + labels.join('<br>');
             return div;
         
         }

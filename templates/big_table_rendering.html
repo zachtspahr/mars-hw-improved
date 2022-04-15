@@ -2,11 +2,10 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>2020 Presidential Results Regression Tables</title>
+    <title>Full Regression Output Tables</title>
     <link type="image/png" sizes="16x16" rel="icon" href="{{ url_for('static', filename='icons8-vote-16.png') }}">
 
   <!-- Leaflet JS & CSS -->
-<link rel="stylesheet" href="/Users/zekdadumle/Desktop/Bootcamp/ETL-Project-Files/checkbox-stuff/static/css_checks.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -34,7 +33,6 @@
 
 <!-- Our CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style20.css')}}">
-  <!--link rel="stylesheet" href="{{ url_for('static', filename='my-style2.css')}}"-->
 </head>
 <style>
 
@@ -59,9 +57,9 @@ body {background-color: #737685;};
             <button id ="hello5" class="btn btn-primary dropdown-toggle" style="color: #337ab7; text-align: center; background-color:transparent; border-color: transparent;" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-map-marker"></span> Statewide Election Results</button>
             
             <ul class="dropdown-menu">
-              <li><a href="https://zach-spahr-politics.herokuapp.com/president_map">Presidential Results from 2000 to 2020 </a></li>
-              <li><a href="https://zach-spahr-politics.herokuapp.com/senate_maps">Senate Results 2008-2020</a></li>
-              <li><a href="https://zach-spahr-politics.herokuapp.com//house_pop_maps">House Popular Vote by State 2008-2020 </a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com/president_map">US Presidential Results from 2000 to 2020 </a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com/senate_maps">US Senate Results 2008-2020</a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com//house_pop_maps">US House Popular Vote by State 2008-2020 </a></li>
             </ul>
             
           </div>
@@ -69,9 +67,9 @@ body {background-color: #737685;};
             <button id ="hello2" class="btn btn-primary dropdown-toggle" style="color: #337ab7; text-align: center; background-color:transparent; border-color: transparent;" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-signal"></span> Results by House District</button>
             
             <ul class="dropdown-menu">
-              <li><a href="https://zach-spahr-politics.herokuapp.com/house_map">Congressional Results 2016-2020</a></li>
-              <li><a href="https://zach-spahr-politics.herokuapp.com/president_cd_maps">Presidential Results by Congressional District 2012-20 </a></li>
-              <li><a href="https://zach-spahr-politics.herokuapp.com/house_districts_demographics">Demographics of Congressional Districts </a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com/house_map">US Congressional Results 2016-2020</a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com/president_cd_maps">US Presidential Results by Congressional District 2012-20 </a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com/house_districts_demographics">Demographics of US Congressional Districts </a></li>
             </ul>
             
           </div>
@@ -90,16 +88,18 @@ body {background-color: #737685;};
           <button id ="hello4" class="btn btn-primary dropdown-toggle" style="color: #337ab7; text-align: center; background-color:transparent; border-color: transparent;" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-bookmark"></span>Other Random Musings</button>
           
           <ul class="dropdown-menu">
-            <li><a href="https://zach-spahr-politics.herokuapp.com/choose_regression">Formula 1</a></li>
-            <li><a href="https://zach-spahr-politics.herokuapp.com/regression_table">General Politics Thoughts </a></li>
+            <li><a href="https://zach-spahr-politics.herokuapp.com/formula_1">Formula 1</a></li>
+            <li><a href="https://zach-spahr-politics.herokuapp.com/US_politics_writing">US Politics</a></li>
+            <li><a href="https://zach-spahr-politics.herokuapp.com/other_thoughts">Other Thoughts</a></li>
             
           </ul>
     
       </div>   
 <div>
     <h4 style="color: rgb(90, 19, 19);text-align: center; text-indent: 0.25cm;"> The tables below provide more details about the model below and what it is doing for those who are interested. The 
-    first set of three tables show the full output of the different regressions. The table below shows the predictions of the regression estimate for each district and 
-the actual values of each independent variable that were put into the regression equation.  </h4>
+    first set of the three tables shows the full output of the different regressions with the independent variables chosen on the previoius page. Below the output table is the covariance matrix, which shows if any independent variables
+  are highly correlated with one another. High correlation between independent variables can lead to issues in the coefficient estimates. Lastly, the final table below shows the predicted and actual vote shares for both Biden and Trump in each 
+congressional district.    </h4>
 </div>
 
       

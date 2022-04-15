@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>2020 Presidential Map Regression</title>
+    <title>2020 Presidential Map Regression Results</title>
     <link type="image/png" sizes="16x16" rel="icon" href="{{ url_for('static', filename='icons8-vote-16.png') }}">
 
   <!-- Leaflet JS & CSS -->
@@ -91,7 +91,8 @@ body {background-color: #737685;};
           
           <ul class="dropdown-menu">
             <li><a href="https://zach-spahr-politics.herokuapp.com/choose_regression">Formula 1</a></li>
-            <li><a href="https://zach-spahr-politics.herokuapp.com/regression_table">General Politics Thoughts </a></li>
+            <li><a href="https://zach-spahr-politics.herokuapp.com/regression_table">General US Politics Thoughts</a></li>
+            
             
           </ul>
     
@@ -350,6 +351,10 @@ remain similar. Those differences between the coefficients tell us something abo
       </center>
 
         <br>
+        <h5> Note: The shades of blue and red on this map correspond to the performance of Biden or Trump relative to what the regression model expects, meaning that a darker shade of blue or red in a 
+          specific district means that Biden or Trump did better in those districts than this specific regression model would predict.  
+          
+        </h5>
         <br>
 
     </article></section>

@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Demographic Info of House Districts  </title>
+    <title>Demographics of Each Congressional District</title>
     <link type="image/png" sizes="16x16" rel="icon" href="{{ url_for('static', filename='icons8-vote-16.png') }}">
 
   <!-- Leaflet JS & CSS -->
@@ -42,7 +42,7 @@ body {background-color: #737685;};
 <body >
 
 
-<div class ="wrapper"> 
+  <div class ="wrapper"> 
     <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -53,28 +53,48 @@ body {background-color: #737685;};
           <!--ul class="nav navbar-nav navbar-right"-->
             <!--a href="https://zach-spahr-politics.herokuapp.com/president_map"><span class="glyphicon glyphicon-map-marker"></span> Presidential Election History</a-->
           <!--/ul-->
-          <div class="dropdown" id ="hello3">
-            <button id ="hello4" class="btn btn-primary dropdown-toggle" style="color: #337ab7; text-align: center; background-color:transparent; border-color: transparent;" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-map-marker"></span> Statewide Election Results</button>
-            
-            <ul class="dropdown-menu">
-              <li><a href="https://zach-spahr-politics.herokuapp.com/president_map">Presidential Results from 2000 to 2020 </a></li>
-              <li><a href="https://zach-spahr-politics.herokuapp.com/senate_maps">Senate Results 2008-2020</a></li>
-              <li><a href="https://zach-spahr-politics.herokuapp.com//house_pop_maps">House Popular Vote by State 2008-2020 </a></li>
-            </ul>
-            
-          </div>
           <div class="dropdown" id ="hello">
-            <button id ="hello2" class="btn btn-primary dropdown-toggle" style="color: #337ab7; text-align: center; background-color:transparent; border-color: transparent;" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-stats"></span> Results by House District</button>
+            <button id ="hello5" class="btn btn-primary dropdown-toggle" style="color: #337ab7; text-align: center; background-color:transparent; border-color: transparent;" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-map-marker"></span> Statewide Election Results</button>
             
             <ul class="dropdown-menu">
-              <li><a href="https://zach-spahr-politics.herokuapp.com/house_map">Congressional Results 2016-2020</a></li>
-              <li><a href="https://zach-spahr-politics.herokuapp.com/president_cd_maps">Presidential Results by Congressional District 2012-20 </a></li>
-              <li><a href="https://zach-spahr-politics.herokuapp.com/house_districts_demographics">Demographics of Congressional Districts </a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com/president_map">US Presidential Results from 2000 to 2020 </a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com/senate_maps">US Senate Results 2008-2020</a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com//house_pop_maps">US House Popular Vote by State 2008-2020 </a></li>
             </ul>
             
           </div>
+          <div class="dropdown" id ="hello2">
+            <button id ="hello2" class="btn btn-primary dropdown-toggle" style="color: #337ab7; text-align: center; background-color:transparent; border-color: transparent;" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-signal"></span> Results by House District</button>
+            
+            <ul class="dropdown-menu">
+              <li><a href="https://zach-spahr-politics.herokuapp.com/house_map">US Congressional Results 2016-2020</a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com/president_cd_maps">US Presidential Results by Congressional District 2012-20 </a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com/house_districts_demographics">Demographics of US Congressional Districts </a></li>
+            </ul>
+            
+          </div>
+          <div class="dropdown" id ="hello3">
+            <button id ="hello3" class="btn btn-primary dropdown-toggle" style="color: #337ab7; text-align: center; background-color:transparent; border-color: transparent;" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-stats"></span>2020 Presidential Results Regression by House District</button>
+            
+            <ul class="dropdown-menu">
+              <li><a href="https://zach-spahr-politics.herokuapp.com/choose_regression">Regression Initiation Page</a></li>
+              <li><a href="https://zach-spahr-politics.herokuapp.com/regression_table">Full Regression Output and Predictions </a></li>
+              
+            </ul>
       
         </div>   
+
+        <div class="dropdown" id ="hello4">
+          <button id ="hello4" class="btn btn-primary dropdown-toggle" style="color: #337ab7; text-align: center; background-color:transparent; border-color: transparent;" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-bookmark"></span>Other Random Musings</button>
+          
+          <ul class="dropdown-menu">
+            <li><a href="https://zach-spahr-politics.herokuapp.com/formula_1">Formula 1</a></li>
+            <li><a href="https://zach-spahr-politics.herokuapp.com/US_politics_writing">US Politics</a></li>
+            <li><a href="https://zach-spahr-politics.herokuapp.com/other_thoughts">Other Thoughts</a></li>
+            
+          </ul>
+    
+      </div>   
 
     <br>
     

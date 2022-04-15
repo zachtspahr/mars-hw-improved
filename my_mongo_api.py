@@ -66,7 +66,7 @@ def index():
 def formula_1():
     return render_template('formula_1_page.html')
 
-@zek_app.route("/other_politics")
+@zek_app.route("/US_politics_writing")
 def other_politics():
     return render_template('other_thoughts_page.html')
 
