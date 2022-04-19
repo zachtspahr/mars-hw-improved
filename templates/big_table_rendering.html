@@ -32,12 +32,23 @@
   
   
   <!-- Our CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style20.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style21.css')}}">
   </head>
   <style>
   
   body {background-color: #737685;};
-  
+  .header {
+    background-repeat: no-repeat;
+    overflow:hidden;
+    height: 255px;
+    padding: 55px;
+    margin: 0;
+    background: black;
+    width: 100%;
+    background-image:
+    linear-gradient(to bottom, rgba(8, 8, 8, 0.5), rgba(8, 8, 8, 0.5)),
+    url('https://pi.tedcdn.com/r/talkstar-assets.s3.amazonaws.com/production/playlists/playlist_197/restore_your_faith_in_politics_1200x627.jpg?quality=89&w=800');
+  }
   </style>
   <body >
   
@@ -97,16 +108,16 @@
         </div>
         
     </div>
+    <header class="header">
+      <br>
+      <h1 class="header1 fadeInDown animated" style="text-indent: 3.0cm; color:whitesmoke; text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Zach's Politics Data</h1>
+      <h2 class="header2 fadeInDown animated" style="text-indent: 4cm; color:whitesmoke;text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; " >Providing Data Sets and Analysis of 2020 Election Races</h2>
+    </header>
   
       <br>
       
   </div>   
-  <header class="header">
-    <br><br><br>
-    <h1 class="header1 fadeInDown animated" style="text-indent: 3.5cm; color:black; text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Zach's Politics Data</h1>
-    <br><br>
-    <h2 class="header2 fadeInDown animated" style="text-indent: 7cm; color: black;text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; " >Providing Data Sets and Analysis of 2020 Election Races</h2>
-  </header>
+  
     <h4 style="color: rgb(90, 19, 19);text-align: center; text-indent: 0.25cm;"> The tables below provide more details about the model below and what it is doing for those who are interested. The 
     first set of the three tables shows the full output of the different regressions with the independent variables chosen on the previoius page. Below the output table is the covariance matrix, which shows if any independent variables
   are highly correlated with one another. High correlation between independent variables can lead to issues in the coefficient estimates. Lastly, the final table below shows the predicted and actual vote shares for both Biden and Trump in each 

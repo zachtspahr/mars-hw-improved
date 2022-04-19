@@ -70,6 +70,10 @@ def formula_1():
 def other_politics():
     return render_template('other_thoughts_page.html')
 
+@zek_app.route("/other_thoughts")
+def other_thoughts():
+    return render_template('other_thoughts_page_copy.html')
+
 @zek_app.route("/state_maps_api")
 def api_senate_maps_endpoint():
     senate_map = db.senate_maps.find_one()
