@@ -21,7 +21,7 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 import random
 from random import randrange
 
-#from "/Users/zspahr/Desktop/Bootcamp/config.py" import mongo
+#from "/Users/zspahr/Desktop/Bootcamp/config.py" import mongo minor change
 
 # Heroku check
 is_heroku = False
